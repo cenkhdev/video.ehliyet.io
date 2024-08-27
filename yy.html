@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ders Videoları</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9fafb;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .ytv1-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .ytv1-course {
+            flex: 1 1 100%;
+            margin-bottom: 20px;
+        }
+
+        .ytv1-course-header {
+            background-color: #0077cc;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+        }
+
+        .ytv1-lesson {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-left: 50px;
+            transition: transform 0.2s;
+        }
+
+        .ytv1-lesson:hover {
+            transform: translateY(-3px);
+        }
+
+        .ytv1-lesson::before {
+            content: '';
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/YouTube_icon_%282013-2017%29.png/800px-YouTube_icon_%282013-2017%29.png');
+            background-size: 24px 24px;
+            background-repeat: no-repeat;
+            width: 24px;
+            height: 24px;
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .ytv1-lesson a {
+            text-decoration: none;
+            color: #0077cc;
+            font-weight: 500;
+            font-size: 16px;
+            margin-left: 10px;
+            transition: color 0.3s;
+        }
+
+        .ytv1-lesson a:hover {
+            color: #005999;
+        }
+
+        @media (max-width: 600px) {
+            .ytv1-course {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ytv1-container">
+        <div class="ytv1-course">
+            <div class="ytv1-course-header">Trafik Dersleri</div>
+            <div class="ytv1-lesson">
+                <a href="vnd.youtube:BMtM0w9EbIg" target="_blank">Kavşaklarda Geçiş Hakkı</a>
+            </div>
+            <div class="ytv1-lesson">
+                <a href="vnd.youtube:yLS8k5aGaNM" target="_blank">Polisin İşaretleri</a>
+            </div>
+            <div class="ytv1-lesson">
+                <a href="vnd.youtube:_QPyMu2psIk" target="_blank">Trafik Levhaları</a>
+            </div>
+        </div>
+
+        <div class="ytv1-course">
+            <div class="ytv1-course-header">Motor Dersleri</div>
+            <div class="ytv1-lesson">
+                <a href="vnd.youtube:0OC3aKjWzeY" target="_blank">Motor Nedir?</a>
+            </div>
+            <div class="ytv1-lesson">
+                <a href="vnd.youtube:9Vv2Uy0Vu2A" target="_blank">Otomatik Vites</a>
+            </div>
+            <div class="ytv1-lesson">
+                <a href="vnd.youtube:vOK6KHmm0CA" target="_blank">Araç Kullanmaya Hazırlık</a>
+            </div>
+            <div class="ytv1-lesson">
+                <a href="vnd.youtube:Z6BFiV0roAw" target="_blank">Aydınlatma & İkaz Sistemi</a>
+            </div>
+            <div class="ytv1-lesson">
+                <a href="vnd.youtube:44xT7mmDY2c" target="_blank">Fren Sistemi</a>
+            </div>
+        </div>
+
+        <div class="ytv1-course">
+            <div class="ytv1-course-header">İlkyardım Dersleri</div>
+            <div class="ytv1-lesson">
+                <a href="vnd.youtube:-ddy1PSrt5Y" target="_blank">İlk Yardım - Acil Tedavi</a>
+            </div>
+            <div class="ytv1-lesson">
+                <a href="vnd.youtube:xSfmD0VxGls" target="_blank">İlkyardımın ABC'si</a>
+            </div>
+            <div class="ytv1-lesson">
+                <a href="vnd.youtube:A-xYsK4OlDA" target="_blank">Vücudu Oluşturan Sistemler</a>
+            </div>
+            <div class="ytv1-lesson">
+                <a href="vnd.youtube:3A7cY4Uk0jc" target="_blank">Kanamalar</a>
+            </div>
+            <div class="ytv1-lesson">
+                <a href="vnd.youtube:2khB7_ysTVY" target="_blank">Turnike</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
