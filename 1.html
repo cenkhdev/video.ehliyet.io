@@ -43,6 +43,7 @@
             padding: 20px;
             max-width: 400px;
             margin: 0 auto;
+            position: relative; /* Menü için konumlandırma */
         }
         .levha {
             width: 100%;
@@ -131,6 +132,11 @@
         .menu a:hover {
             background: #f0f0f0;
         }
+        .menu-container {
+            display: flex;
+            justify-content: flex-end; /* Menü sağa hizalanacak */
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -139,14 +145,6 @@
     <h1>Tehlike Uyarı İşaretleri</h1>
 
     <div class="container">
-        <div class="menu-icon" onclick="toggleMenu()">☰</div>
-        <div class="menu" id="menu">
-            <a href="#">Anasayfa</a>
-            <a href="#">Bilgi</a>
-            <a href="#">Tanzim</a>
-            <a href="#">Polis İşletmeleri</a>
-        </div>
-
         <img id="levhaResmi" src="img/1.jpg" alt="Sağa Tehlikeli Viraj" class="levha">
         
         <div class="anlam" id="levhaAnlami">
@@ -165,6 +163,16 @@
             </button>
         </div>
         <div id="resimSayisi" class="resim-sayisi"></div>
+        
+        <div class="menu-container">
+            <div class="menu-icon" onclick="toggleMenu()">☰</div>
+            <div class="menu" id="menu">
+                <a href="#">Anasayfa</a>
+                <a href="#">Bilgi</a>
+                <a href="#">Tanzim</a>
+                <a href="#">Polis İşletmeleri</a>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -195,10 +203,10 @@
         { resim: "img/16.jpg", anlam: "Yan Yatan Şev" },
         { resim: "img/17.jpg", anlam: "Yol Çalışması" },
         { resim: "img/18.jpg", anlam: "Yolda Hayvan Geçebilir" },
-        { resim: "img/19.jpg", anlam: "Yolda Çalışma" },
-        { resim: "img/20.jpg", anlam: "Yolda Kalan Araç" },
-        { resim: "img/21.jpg", anlam: "Yol Kapanması" },
-        { resim: "img/22.jpg", anlam: "Yol Kapanması" },
+        { resim: "img/19.jpg", anlam: "Yolda Çamur" },
+        { resim: "img/20.jpg", anlam: "Yol Kapanması" },
+        { resim: "img/21.jpg", anlam: "Yolda Kayganlık" },
+        { resim: "img/22.jpg", anlam: "Yolda Kayganlık" },
         { resim: "img/23.jpg", anlam: "Yolda Kayganlık" },
         { resim: "img/24.jpg", anlam: "Yolda Kayganlık" },
         { resim: "img/25.jpg", anlam: "Yolda Kayganlık" },
