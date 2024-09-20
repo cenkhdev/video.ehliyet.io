@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    
+	
+	
+	 <title>Trafik Polisi İşaretleri: Anlamları ve Kullanımları</title>
+    <meta name="description" content="Trafik polisi işaretleri, trafik akışını düzenlemek ve sürücülere yönlendirme yapmak için kullanılır. Bu sayfada, farklı trafik polisi işaretlerinin anlamları ve nasıl kullanıldığı hakkında detaylı bilgi bulabilirsiniz.">
+    <meta name="keywords" content="trafik polisi işaretleri, trafik işaretleri, trafik güvenliği, trafik düzenleme, sürücü yönlendirme, trafik işaretleri anlamları">
+    <meta property="og:title" content="Trafik Polisi İşaretleri: Anlamları ve Kullanımları">
+    <meta property="og:description" content="Trafik polisi işaretleri, trafik akışını düzenlemek ve sürücülere yönlendirme yapmak için kullanılır.">
+    <meta property="og:url" content="http://www.orneksite.com/trafik-polis-isaretleri">
+    <meta property="og:image" content="img/tehlike/1.jpg"> <!-- Örnek resim -->
+    <meta property="og:type" content="website">
+	
+	
+	
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding-top: 40px;
+        }
+        .wrapper {
+            text-align: center;
+            max-width: 96%;
+        }
+        h1 {
+            font-size: 28px;
+            color: #333;
+            background-color: #e9ecef;
+            padding: 10px 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 0 0 20px 0;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .levha {
+            width: 100%;
+            max-width: 250px;
+            margin: 0 auto;
+        }
+        .watermark {
+            position: absolute;
+            top: 50%; /* Dikey merkezleme */
+            left: 50%; /* Yatay merkezleme */
+            transform: translate(-50%, -50%); /* Merkeze yerleştirme */
+            color: rgba(0, 0, 0, 0.05); /* Daha soluk renk */
+            font-size: 20px;
+            pointer-events: none; /* Tıklanamaz olması için */
+            white-space: nowrap; /* Tek satırda kalması için */
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .buttons button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 28px;
+            transition: transform 0.2s, color 0.2s;
+            margin: 0 25px;
+        }
+        .buttons button:hover {
+            transform: scale(1.2);
+            color: #007BFF;
+        }
+        .anlam {
+            visibility: hidden; /* Başlangıçta kapalı */
+            background-color: #e0e0e0;
+            border-radius: 30px;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 16px;
+            color: #333;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .eye-icon {
+            cursor: pointer;
+            font-size: 30px;
+            transition: transform 0.2s;
+        }
+        .eye-icon.hidden {
+            color: rgba(0, 0, 0, 0.5); /* Soluk renk */
+        }
+        .eye-icon.visible {
+            color: #000; /* Normal renk */
+        }
+        .resim-sayisi {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+        .menu-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+            position: relative;
+        }
+        .menu-icon {
+            cursor: pointer;
+            font-size: 24px;
+            color: #007BFF;
+            background: none;
+            border: none;
+            padding: 5px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            transition: background 0.2s, transform 0.2s;
+        }
+        .menu-icon:hover {
+            background: rgba(0, 123, 255, 0.1);
+            transform: scale(1.1);
+        }
+        .menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            text-align: center;
+        }
+        .menu a {
+            display: block;
+            padding: 20px;
+            text-decoration: none;
+            color: white;
+            font-size: 24px;
+            transition: background 0.2s;
+        }
+        .menu a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <h1>Trafik Polisi İşaretleri</h1>
+
+    <div class="container">
+        <img id="levhaResmi" src="img/1.jpg" alt="Sağa Tehlikeli Viraj" class="levha">
+        <div class="watermark">@ehliyetcenkhoca</div> <!-- Watermark Eklendi -->
+        
+        <div class="anlam" id="levhaAnlami">
+            Sağa Tehlikeli Viraj
+        </div>
+
+        <div class="buttons">
+            <button id="geriButonu" onclick="oncekiLevha()" disabled>
+                &#9664;  <!-- Sol ok simgesi -->
+            </button>
+            <div class="eye-icon" id="gözButonu" onclick="anlamiGoster()">
+                👁️
+            </div>
+            <button id="ileriButonu" onclick="sonrakiLevha()">
+                &#9654;  <!-- Sağ ok simgesi -->
+            </button>
+        </div>
+        <div id="resimSayisi" class="resim-sayisi"></div>
+    </div>
+
+    <div class="menu-container">
+        <button class="menu-icon" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="menu" id="menu">
+            <div class="close-menu" onclick="toggleMenu()">✖️</div>
+            <a href="https://ehliyetsorulari.net">Anasayfa</a>
+            <a href="tehlike-uyari-isaretleri">Tehlike Uyarı İşaretleri</a>
+            <a href="trafik-tanzim-isaretleri">Trafik Tanzim İşaretleri</a>
+            <a href="duraklama-ve-park-etme-isaretleri">Duraklama ve Park Etme İşaretleri</a>
+			<a href="otoyol-isaretleri">Otoyol İşaretleri</a>
+			<a href="yapim-bakim-ve-onerim-isaretleri">Yapım Bakım ve Onarım İşaretleri</a>
+			<a href="trafik-gorevlisinin-isaretleri">Trafik Görevlisinin İşaretleri</a>
+			<a href="arac-gosterge-isaretleri">Araç Gösterge İşaretleri</a>
+			<a href="https://ehliyetsorulari.net/ehliyet-sinav-sorulari/">Ehliyet Sınav Soruları çöz</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    let anlamGorunuyor = false;
+
+    function toggleMenu() {
+        const menu = document.getElementById("menu");
+        menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    }
+
+    const levhalar = 
+	
+	
+	
+	[
+    { "resim": "img/polis/1.jpg", "anlam": "Trafik görevlisinin duruş pozisyonuna göre önünde ve arkasındaki yollar trafiğe kapalı, sağ ve sol kol istikametindeki yollar trafiğe açıktır. Bu duruş pozisyonuna göre her iki kolda kapalı olabileceği gibi yere paralelde olabilir." },
+    { "resim": "img/polis/2.jpg", "anlam": "Sağ taraftaki trafiğin sola, sol taraftaki trafiğin sağa gidebileceğini gösterir." },
+    { "resim": "img/polis/3.jpg", "anlam": "Trafiğin bütün istikametlere kapatıldığının sağ ve sol kol ile gösterimidir." },
+    { "resim": "img/polis/4.jpg", "anlam": "Araçların sağda veya solda durdurulması işareti." },
+    { "resim": "img/polis/5.jpg", "anlam": "Trafiğin sağ veya sol istikamette hızlanması işaretidir. Görevlinin diğer eliyle düdüğünü kısa kısa çalması da hızlan anlamına gelir." },
+    { "resim": "img/polis/6.jpg", "anlam": "Trafiğin sağ veya sol istikamette yavaşlaması anlamına gelir. Görevlinin düdüğünü güçlü ve kesiksiz olarak çalması da DUR anlamındadır." },
+    { "resim": "img/polis/7.jpg", "anlam": "Görevlinin araçlara sağ veya sol istikamette yön tayin ettiği işarettir." },
+    { "resim": "img/polis/8.jpg", "anlam": "Görevlinin gece DUR, GEÇ, DÖNÜŞ talimatlarını ilettiği işaretlerdir." },
+    { "resim": "img/polis/9.jpg", "anlam": "Görevlinin trafik akımını kesme işaretidir." },
+    { "resim": "img/polis/10.jpg", "anlam": "Görevlinin kırmızı ışık yanıyor olmasına rağmen trafiği açması işaretidir." },
+    { "resim": "img/polis/11.jpg", "anlam": "Görevlinin kavşak idaresini kontrolü altına alma işaretidir." },
+    { "resim": "img/polis/12.jpg", "anlam": "Görevlinin trafik akımını ışık idaresine bırakması işaretidir." }
+]
+	
+	
+;
+
+    let mevcutLevhaIndex = 0;
+
+    function guncelleLevha() {
+        const levhaResmi = document.getElementById("levhaResmi");
+        const levhaAnlami = document.getElementById("levhaAnlami");
+        const resimSayisi = document.getElementById("resimSayisi");
+        const gözButonu = document.getElementById("gözButonu");
+
+        levhaResmi.src = levhalar[mevcutLevhaIndex].resim;
+        levhaAnlami.textContent = levhalar[mevcutLevhaIndex].anlam;
+        resimSayisi.textContent = `${mevcutLevhaIndex + 1} / ${levhalar.length}`;
+
+        document.getElementById("geriButonu").disabled = mevcutLevhaIndex === 0;
+        document.getElementById("ileriButonu").disabled = mevcutLevhaIndex === levhalar.length - 1;
+
+        // Anlamı her tıkladığında açıp kapat
+        levhaAnlami.style.visibility = anlamGorunuyor ? "visible" : "hidden";
+
+        // Göz ikonunun durumunu güncelle
+        gözButonu.className = anlamGorunuyor ? "eye-icon visible" : "eye-icon hidden";
+    }
+
+    function oncekiLevha() {
+        if (mevcutLevhaIndex > 0) {
+            mevcutLevhaIndex--;
+            anlamGorunuyor = false; // Her geçişte anlam kapalı olmalı
+            guncelleLevha();
+        }
+    }
+
+    function sonrakiLevha() {
+        if (mevcutLevhaIndex < levhalar.length - 1) {
+            mevcutLevhaIndex++;
+            anlamGorunuyor = false; // Her geçişte anlam kapalı olmalı
+            guncelleLevha();
+        }
+    }
+
+    function anlamiGoster() {
+        anlamGorunuyor = !anlamGorunuyor;
+        guncelleLevha();
+    }
+
+    guncelleLevha();
+</script>
+
+</body>
+</html>
