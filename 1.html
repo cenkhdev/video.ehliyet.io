@@ -43,7 +43,6 @@
             padding: 20px;
             max-width: 400px;
             margin: 0 auto;
-            position: relative; /* Menü için konumlandırma */
         }
         .levha {
             width: 100%;
@@ -95,9 +94,6 @@
             color: #333;
         }
         .menu-icon {
-            position: absolute;
-            top: 15px;
-            right: 15px;
             cursor: pointer;
             font-size: 24px;
             transition: transform 0.2s;
@@ -107,6 +103,7 @@
             padding: 8px;
             border-radius: 4px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            margin-top: 20px; /* Menü için boşluk */
         }
         .menu-icon:hover {
             transform: scale(1.2);
@@ -136,6 +133,7 @@
             display: flex;
             justify-content: flex-end; /* Menü sağa hizalanacak */
             margin-top: 10px;
+            position: relative; /* Menü için konumlandırma */
         }
     </style>
 </head>
@@ -163,15 +161,15 @@
             </button>
         </div>
         <div id="resimSayisi" class="resim-sayisi"></div>
-        
-        <div class="menu-container">
-            <div class="menu-icon" onclick="toggleMenu()">☰</div>
-            <div class="menu" id="menu">
-                <a href="#">Anasayfa</a>
-                <a href="#">Bilgi</a>
-                <a href="#">Tanzim</a>
-                <a href="#">Polis İşletmeleri</a>
-            </div>
+    </div>
+
+    <div class="menu-container">
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+        <div class="menu" id="menu">
+            <a href="#">Anasayfa</a>
+            <a href="#">Bilgi</a>
+            <a href="#">Tanzim</a>
+            <a href="#">Polis İşletmeleri</a>
         </div>
     </div>
 </div>
