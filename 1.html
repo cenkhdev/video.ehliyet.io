@@ -71,7 +71,7 @@
             color: #007BFF;
         }
         .anlam {
-            visibility: hidden;
+            visibility: hidden; /* Başlangıçta kapalı */
             background-color: #e0e0e0;
             border-radius: 30px;
             padding: 10px;
@@ -221,7 +221,7 @@
         { resim: "img/13.jpg", anlam: "Kaygan Yol" },
         { resim: "img/14.jpg", anlam: "Gevşek Malzemeli Zemin" },
         { resim: "img/15.jpg", anlam: "Dikkatli Ol" },
-        { resim: "img/16.jpg", anlam: "Sürücü Dikkatli Olmalı" },
+        { resim: "img/16.jpg", anlam: "Yaya Geçidi" },
         { resim: "img/17.jpg", anlam: "Hayvan Geçişi" },
         { resim: "img/18.jpg", anlam: "Yavaş Gidin" },
         { resim: "img/19.jpg", anlam: "Dönemeç" },
@@ -283,6 +283,8 @@
 
         document.getElementById("geriButonu").disabled = mevcutLevhaIndex === 0;
         document.getElementById("ileriButonu").disabled = mevcutLevhaIndex === levhalar.length - 1;
+        
+        // Anlamı her tıkladığında açıp kapat
         levhaAnlami.style.visibility = anlamGorunuyor ? "visible" : "hidden";
 
         // Göz ikonunun durumunu güncelle
