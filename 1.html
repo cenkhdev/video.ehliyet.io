@@ -45,10 +45,10 @@
         }
         .watermark {
             position: absolute;
-            bottom: 10px;
+            bottom: 10px; /* LevhaResmi'nin altında */
             left: 50%;
             transform: translateX(-50%);
-            color: rgba(0, 0, 0, 0.3); /* Soluk renk */
+            color: rgba(0, 0, 0, 0.1); /* Daha soluk renk */
             font-size: 16px;
             pointer-events: none; /* Tıklanamaz olması için */
         }
@@ -283,7 +283,7 @@
 
         document.getElementById("geriButonu").disabled = mevcutLevhaIndex === 0;
         document.getElementById("ileriButonu").disabled = mevcutLevhaIndex === levhalar.length - 1;
-        
+
         // Anlamı her tıkladığında açıp kapat
         levhaAnlami.style.visibility = anlamGorunuyor ? "visible" : "hidden";
 
@@ -312,6 +312,6 @@
 
     guncelleLevha();
 </script>
-1
+2
 </body>
 </html>
