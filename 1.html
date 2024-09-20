@@ -45,9 +45,9 @@
         }
         .watermark {
             position: absolute;
-            bottom: 10px; /* Resmin altına yerleştirme */
-            left: 50%;
-            transform: translate(-50%, 0);
+            top: 50%; /* Dikey merkezleme */
+            left: 50%; /* Yatay merkezleme */
+            transform: translate(-50%, -50%); /* Merkeze yerleştirme */
             color: rgba(0, 0, 0, 0.05); /* Daha soluk renk */
             font-size: 20px;
             pointer-events: none; /* Tıklanamaz olması için */
@@ -221,7 +221,7 @@
         { resim: "img/12.jpg", anlam: "Kasisli Yol" },
         { resim: "img/13.jpg", anlam: "Kaygan Yol" },
         { resim: "img/14.jpg", anlam: "Gevşek Malzemeli Zemin" },
-        { resim: "img/15.jpg", anlam: "Yaya Geçidi" },
+        { resim: "img/15.jpg", anlam: "Geçiş Yolu" },
         { resim: "img/16.jpg", anlam: "Hayvan Geçişi" },
         { resim: "img/17.jpg", anlam: "Yavaş Gidin" },
         { resim: "img/18.jpg", anlam: "Dönemeç" },
@@ -315,6 +315,6 @@
 
     guncelleLevha();
 </script>
-4
+1
 </body>
 </html>
