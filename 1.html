@@ -36,11 +36,21 @@
             padding: 20px;
             max-width: 400px;
             margin: 0 auto;
+            position: relative; /* Watermark için gerekli */
         }
         .levha {
             width: 100%;
             max-width: 250px;
             margin: 0 auto;
+        }
+        .watermark {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(0, 0, 0, 0.3); /* Soluk renk */
+            font-size: 16px;
+            pointer-events: none; /* Tıklanamaz olması için */
         }
         .buttons {
             display: flex;
@@ -153,6 +163,7 @@
 
     <div class="container">
         <img id="levhaResmi" src="img/1.jpg" alt="Sağa Tehlikeli Viraj" class="levha">
+        <div class="watermark">@ehliyetcenkhoca</div> <!-- Watermark Eklendi -->
         
         <div class="anlam" id="levhaAnlami">
             Sağa Tehlikeli Viraj
@@ -211,10 +222,10 @@
         { resim: "img/14.jpg", anlam: "Gevşek Malzemeli Zemin" },
         { resim: "img/15.jpg", anlam: "Dikkatli Ol" },
         { resim: "img/16.jpg", anlam: "Sürücü Dikkatli Olmalı" },
-        { resim: "img/17.jpg", anlam: "Tren Yolu Geçidi" },
-        { resim: "img/18.jpg", anlam: "Küçük Çocuk" },
-        { resim: "img/19.jpg", anlam: "Yavaş" },
-        { resim: "img/20.jpg", anlam: "Sıkı Dönüş" },
+        { resim: "img/17.jpg", anlam: "Hayvan Geçişi" },
+        { resim: "img/18.jpg", anlam: "Yavaş Gidin" },
+        { resim: "img/19.jpg", anlam: "Dönemeç" },
+        { resim: "img/20.jpg", anlam: "Dönemeç" },
         { resim: "img/21.jpg", anlam: "Bölünmüş Yol" },
         { resim: "img/22.jpg", anlam: "Yolda Çalışma" },
         { resim: "img/23.jpg", anlam: "Yolda Çalışma" },
