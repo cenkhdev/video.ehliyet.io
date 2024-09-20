@@ -24,18 +24,6 @@
             position: relative;
             padding-top: 20px; /* Üst boşluk */
         }
-        .container {
-            text-align: center;
-            background-color: #fff;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            max-width: 90%;
-            width: 400px; /* Genişlik artırıldı */
-            margin-top: 20px; /* Başlık ile container arasındaki boşluk */
-            margin-left: 15px; /* Mobilde soldan boşluk */
-            margin-right: 15px; /* Mobilde sağdan boşluk */
-        }
         h1 {
             font-size: 28px; /* Başlık boyutu */
             color: #333;
@@ -44,9 +32,18 @@
             border-radius: 15px; /* Başlık köşe yuvarlama */
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             text-align: center;
-            width: calc(100% - 30px); /* Kenar boşluğu için */
-            margin-left: 15px; /* Mobilde soldan boşluk */
-            margin-right: 15px; /* Mobilde sağdan boşluk */
+            width: calc(100% - 40px); /* Kenar boşluğu için */
+            margin: 0; /* Kenar boşluğunu sıfırla */
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 90%;
+            width: 400px; /* Genişlik artırıldı */
+            margin: 20px 15px; /* Başlık ile container arasındaki boşluk */
         }
         .levha {
             width: 100%;
