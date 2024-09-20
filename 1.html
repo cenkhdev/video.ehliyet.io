@@ -17,11 +17,12 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* Üstte başlık için */
             min-height: 100vh;
             background-color: #f5f5f5;
             margin: 0;
             position: relative;
+            padding-top: 20px; /* Üst boşluk */
         }
         .container {
             text-align: center;
@@ -31,7 +32,19 @@
             padding: 20px;
             max-width: 90%;
             width: 400px; /* Genişlik artırıldı */
-            margin-top: -90px; /* Yukarı alınma */
+            margin-top: 20px; /* Başlık ile container arasındaki boşluk */
+            margin-left: 15px; /* Mobilde soldan boşluk */
+            margin-right: 15px; /* Mobilde sağdan boşluk */
+        }
+        h1 {
+            font-size: 28px; /* Başlık boyutu */
+            color: #333;
+            background-color: #e9ecef; /* Başlık arka plan rengi */
+            padding: 10px 20px; /* Başlık iç boşluğu */
+            border-radius: 15px; /* Başlık köşe yuvarlama */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: calc(100% - 30px); /* Kenar boşluğu için */
             margin-left: 15px; /* Mobilde soldan boşluk */
             margin-right: 15px; /* Mobilde sağdan boşluk */
         }
@@ -39,11 +52,6 @@
             width: 100%;
             max-width: 250px;
             margin: 0 auto;
-        }
-        h1 {
-            font-size: 24px;
-            color: #333;
-            margin-bottom: 20px; /* Başlık altındaki boşluk */
         }
         .buttons {
             display: flex;
@@ -131,8 +139,9 @@
 </head>
 <body>
 
+<h1>Tehlike Uyarı İşaretleri</h1> <!-- Başlık dışarı alındı -->
+
 <div class="container">
-    <h1>Tehlike Uyarı İşaretleri</h1> <!-- Başlık eklendi -->
     <div class="menu-icon" onclick="toggleMenu()">☰</div>
     <div class="menu" id="menu">
         <a href="#">Anasayfa</a>
@@ -185,12 +194,12 @@
         { resim: "img/13.jpg", anlam: "Kaygan Yol" },
         { resim: "img/14.jpg", anlam: "Gevşek Malzemeli Zemin" },
         { resim: "img/15.jpg", anlam: "Gevşek Şev" },
-        { resim: "img/16.jpg", anlam: "Yaya Geçidi Yaklaşım" },
-        { resim: "img/17.jpg", anlam: "Okul Geçidi" },
-        { resim: "img/18.jpg", anlam: "Bisiklet Geçebilir" },
-        { resim: "img/19.jpg", anlam: "Ehli Hayvanlar Geçebilir" },
-        { resim: "img/20.jpg", anlam: "Vahşi Hayvanlar Geçebilir" },
-        { resim: "img/21.jpg", anlam: "Dikkat Eşya Düşebilir" },
+        { resim: "img/16.jpg", anlam: "Yan Yatan Şev" },
+        { resim: "img/17.jpg", anlam: "Yol Çalışması" },
+        { resim: "img/18.jpg", anlam: "Yolda Hayvan Geçebilir" },
+        { resim: "img/19.jpg", anlam: "Yolda Çalışma" },
+        { resim: "img/20.jpg", anlam: "Yolda Kalan Araç" },
+        { resim: "img/21.jpg", anlam: "Yol Kapanması" },
         { resim: "img/22.jpg", anlam: "Yol Kapanması" },
         { resim: "img/23.jpg", anlam: "Yolda Kayganlık" },
         { resim: "img/24.jpg", anlam: "Yolda Kayganlık" },
