@@ -78,8 +78,11 @@
             font-size: 30px;
             transition: transform 0.2s;
         }
-        .eye-icon:hover {
-            transform: scale(1.2);
+        .eye-icon.hidden {
+            color: rgba(0, 0, 0, 0.5); /* Soluk renk */
+        }
+        .eye-icon.visible {
+            color: #000; /* Normal renk */
         }
         .resim-sayisi {
             margin-top: 10px;
@@ -212,9 +215,9 @@
         { resim: "img/18.jpg", anlam: "Küçük Çocuk" },
         { resim: "img/19.jpg", anlam: "Yavaş" },
         { resim: "img/20.jpg", anlam: "Sıkı Dönüş" },
-        { resim: "img/21.jpg", anlam: "Hayvan Geçidi" },
-        { resim: "img/22.jpg", anlam: "Yolda Kayganlık" },
-        { resim: "img/23.jpg", anlam: "Yolda Kayganlık" },
+        { resim: "img/21.jpg", anlam: "Bölünmüş Yol" },
+        { resim: "img/22.jpg", anlam: "Yolda Çalışma" },
+        { resim: "img/23.jpg", anlam: "Yolda Çalışma" },
         { resim: "img/24.jpg", anlam: "Yolda Kayganlık" },
         { resim: "img/25.jpg", anlam: "Yolda Kayganlık" },
         { resim: "img/26.jpg", anlam: "Yolda Kayganlık" },
@@ -261,6 +264,7 @@
         const levhaResmi = document.getElementById("levhaResmi");
         const levhaAnlami = document.getElementById("levhaAnlami");
         const resimSayisi = document.getElementById("resimSayisi");
+        const gözButonu = document.getElementById("gözButonu");
 
         levhaResmi.src = levhalar[mevcutLevhaIndex].resim;
         levhaAnlami.textContent = levhalar[mevcutLevhaIndex].anlam;
@@ -269,6 +273,9 @@
         document.getElementById("geriButonu").disabled = mevcutLevhaIndex === 0;
         document.getElementById("ileriButonu").disabled = mevcutLevhaIndex === levhalar.length - 1;
         levhaAnlami.style.visibility = anlamGorunuyor ? "visible" : "hidden";
+
+        // Göz ikonunun durumunu güncelle
+        gözButonu.className = anlamGorunuyor ? "eye-icon visible" : "eye-icon hidden";
     }
 
     function oncekiLevha() {
