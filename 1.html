@@ -45,12 +45,13 @@
         }
         .watermark {
             position: absolute;
-            bottom: 10px; /* LevhaResmi'nin altında */
+            top: 20%; /* Resmin üstünde konumlandırma */
             left: 50%;
-            transform: translateX(-50%);
-            color: rgba(0, 0, 0, 0.1); /* Daha soluk renk */
-            font-size: 16px;
+            transform: translate(-50%, -50%);
+            color: rgba(0, 0, 0, 0.05); /* Daha soluk renk */
+            font-size: 20px;
             pointer-events: none; /* Tıklanamaz olması için */
+            white-space: nowrap; /* Tek satırda kalması için */
         }
         .buttons {
             display: flex;
@@ -220,15 +221,15 @@
         { resim: "img/12.jpg", anlam: "Kasisli Yol" },
         { resim: "img/13.jpg", anlam: "Kaygan Yol" },
         { resim: "img/14.jpg", anlam: "Gevşek Malzemeli Zemin" },
-        { resim: "img/15.jpg", anlam: "Dikkatli Ol" },
-        { resim: "img/16.jpg", anlam: "Yaya Geçidi" },
-        { resim: "img/17.jpg", anlam: "Hayvan Geçişi" },
-        { resim: "img/18.jpg", anlam: "Yavaş Gidin" },
+        { resim: "img/15.jpg", anlam: "Yaya Geçidi" },
+        { resim: "img/16.jpg", anlam: "Hayvan Geçişi" },
+        { resim: "img/17.jpg", anlam: "Yavaş Gidin" },
+        { resim: "img/18.jpg", anlam: "Dönemeç" },
         { resim: "img/19.jpg", anlam: "Dönemeç" },
-        { resim: "img/20.jpg", anlam: "Dönemeç" },
-        { resim: "img/21.jpg", anlam: "Bölünmüş Yol" },
+        { resim: "img/20.jpg", anlam: "Bölünmüş Yol" },
+        { resim: "img/21.jpg", anlam: "Yolda Çalışma" },
         { resim: "img/22.jpg", anlam: "Yolda Çalışma" },
-        { resim: "img/23.jpg", anlam: "Yolda Çalışma" },
+        { resim: "img/23.jpg", anlam: "Yolda Kayganlık" },
         { resim: "img/24.jpg", anlam: "Yolda Kayganlık" },
         { resim: "img/25.jpg", anlam: "Yolda Kayganlık" },
         { resim: "img/26.jpg", anlam: "Yolda Kayganlık" },
