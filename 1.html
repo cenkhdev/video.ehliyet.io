@@ -115,22 +115,24 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(255, 255, 255, 0.9); /* Şeffaf arka plan */
-            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.8); /* Koyu arka plan */
+            color: white; /* Yazı rengi beyaz */
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            z-index: 1000;
+            text-align: center; /* Menü yazılarını ortala */
         }
         .menu a {
             display: block;
             padding: 20px;
             text-decoration: none;
-            color: #333;
+            color: white; /* Beyaz renk */
             font-size: 24px;
             transition: background 0.2s;
         }
         .menu a:hover {
-            background: #f0f0f0;
+            background: rgba(255, 255, 255, 0.2); /* Hover rengi */
         }
         .menu-container {
             display: flex;
@@ -144,6 +146,7 @@
             right: 20px;
             font-size: 30px;
             cursor: pointer;
+            color: white; /* Beyaz renk */
         }
     </style>
 </head>
@@ -208,11 +211,11 @@
         { resim: "img/12.jpg", anlam: "Kasisli Yol" },
         { resim: "img/13.jpg", anlam: "Kaygan Yol" },
         { resim: "img/14.jpg", anlam: "Gevşek Malzemeli Zemin" },
-        { resim: "img/15.jpg", anlam: "Gevşek Şev" },
-        { resim: "img/16.jpg", anlam: "Yan Yatan Şev" },
-        { resim: "img/17.jpg", anlam: "Sürücü Dikkatli Olmalı" },
-        { resim: "img/18.jpg", anlam: "Yolda Çizgi Olmaması" },
-        { resim: "img/19.jpg", anlam: "Yol Kapanması" },
+        { resim: "img/15.jpg", anlam: "Dikkatli Ol" },
+        { resim: "img/16.jpg", anlam: "Sürücü Dikkatli Olmalı" },
+        { resim: "img/17.jpg", anlam: "Yolda Çizgi Olmaması" },
+        { resim: "img/18.jpg", anlam: "Yol Kapanması" },
+        { resim: "img/19.jpg", anlam: "Yolda Kayganlık" },
         { resim: "img/20.jpg", anlam: "Yolda Kayganlık" },
         { resim: "img/21.jpg", anlam: "Yolda Kayganlık" },
         { resim: "img/22.jpg", anlam: "Yolda Kayganlık" },
