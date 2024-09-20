@@ -36,7 +36,7 @@
             padding: 20px;
             max-width: 400px;
             margin: 0 auto;
-            position: relative; /* Watermark için gerekli */
+            position: relative;
         }
         .levha {
             width: 100%;
@@ -45,9 +45,9 @@
         }
         .watermark {
             position: absolute;
-            top: 20%; /* Resmin üstünde konumlandırma */
+            bottom: 10px; /* Resmin altına yerleştirme */
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, 0);
             color: rgba(0, 0, 0, 0.05); /* Daha soluk renk */
             font-size: 20px;
             pointer-events: none; /* Tıklanamaz olması için */
@@ -315,6 +315,6 @@
 
     guncelleLevha();
 </script>
-
+4
 </body>
 </html>
