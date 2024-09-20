@@ -188,6 +188,8 @@
 <script src="tehlike.js"></script>
 
 <script>
+    let anlamGorunuyor = false;
+
     function toggleMenu() {
         const menu = document.getElementById("menu");
         menu.style.display = menu.style.display === "flex" ? "none" : "flex";
@@ -210,11 +212,11 @@
         { resim: "img/14.jpg", anlam: "Gevşek Malzemeli Zemin" },
         { resim: "img/15.jpg", anlam: "Dikkatli Ol" },
         { resim: "img/16.jpg", anlam: "Sürücü Dikkatli Olmalı" },
-        { resim: "img/17.jpg", anlam: "Yolda Çizgi Olmaması" },
-        { resim: "img/18.jpg", anlam: "Yol Kapanması" },
-        { resim: "img/19.jpg", anlam: "Yolda Kayganlık" },
-        { resim: "img/20.jpg", anlam: "Yolda Kayganlık" },
-        { resim: "img/21.jpg", anlam: "Yolda Kayganlık" },
+        { resim: "img/17.jpg", anlam: "Tren Yolu Geçidi" },
+        { resim: "img/18.jpg", anlam: "Küçük Çocuk" },
+        { resim: "img/19.jpg", anlam: "Yavaş" },
+        { resim: "img/20.jpg", anlam: "Sıkı Dönüş" },
+        { resim: "img/21.jpg", anlam: "Hayvan Geçidi" },
         { resim: "img/22.jpg", anlam: "Yolda Kayganlık" },
         { resim: "img/23.jpg", anlam: "Yolda Kayganlık" },
         { resim: "img/24.jpg", anlam: "Yolda Kayganlık" },
@@ -285,11 +287,6 @@
             mevcutLevhaIndex++;
             guncelleLevha();
         }
-    }
-
-    function anlamiGoster() {
-        const levhaAnlami = document.getElementById("levhaAnlami");
-        levhaAnlami.style.visibility = "visible";
     }
 
     guncelleLevha();
