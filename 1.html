@@ -294,6 +294,7 @@
     function oncekiLevha() {
         if (mevcutLevhaIndex > 0) {
             mevcutLevhaIndex--;
+            anlamGorunuyor = false; // Her geçişte anlam kapalı olmalı
             guncelleLevha();
         }
     }
@@ -301,6 +302,7 @@
     function sonrakiLevha() {
         if (mevcutLevhaIndex < levhalar.length - 1) {
             mevcutLevhaIndex++;
+            anlamGorunuyor = false; // Her geçişte anlam kapalı olmalı
             guncelleLevha();
         }
     }
@@ -312,6 +314,6 @@
 
     guncelleLevha();
 </script>
-2
+
 </body>
 </html>
