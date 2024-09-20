@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <title>Tehlike Uyarı İşaretleri | Trafik Levhaları ve İşaretleri</title>
+    <meta name="description" content="Tehlike uyarı işaretleri, sürücüleri tehlikeler hakkında bilgilendirmek ve güvenliği artırmak için kullanılır. Bu sayfada, farklı tehlike uyarı işaretlerinin anlamları ve kullanımları hakkında bilgi edinebilirsiniz.">
+    <meta name="keywords" content="tehlike uyarı işaretleri, trafik levhaları, trafik işaretleri, trafik güvenliği, yol güvenliği, sürücü bilgilendirme">
+    <meta property="og:title" content="Tehlike Uyarı İşaretleri | Trafik Levhaları ve İşaretleri">
+    <meta property="og:description" content="Tehlike uyarı işaretleri, sürücüleri tehlikeler hakkında bilgilendirmek ve güvenliği artırmak için kullanılır.">
+    <meta property="og:url" content="http://www.ehliyetsorulari.net/levhalar/tehlike-uyari-isaretleri">
+    <meta property="og:image" content="img/tehlike/tehlike.jpg"> <!-- Örnek resim -->
+    <meta property="og:type" content="website">
+
+	
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding-top: 40px;
+        }
+        .wrapper {
+            text-align: center;
+            max-width: 96%;
+        }
+        h1 {
+            font-size: 28px;
+            color: #333;
+            background-color: #e9ecef;
+            padding: 10px 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 0 0 20px 0;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .levha {
+            width: 100%;
+            max-width: 250px;
+            margin: 0 auto;
+        }
+        .watermark {
+            position: absolute;
+            top: 50%; /* Dikey merkezleme */
+            left: 50%; /* Yatay merkezleme */
+            transform: translate(-50%, -50%); /* Merkeze yerleştirme */
+            color: rgba(0, 0, 0, 0.05); /* Daha soluk renk */
+            font-size: 20px;
+            pointer-events: none; /* Tıklanamaz olması için */
+            white-space: nowrap; /* Tek satırda kalması için */
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .buttons button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 28px;
+            transition: transform 0.2s, color 0.2s;
+            margin: 0 25px;
+        }
+        .buttons button:hover {
+            transform: scale(1.2);
+            color: #007BFF;
+        }
+        .anlam {
+            visibility: hidden; /* Başlangıçta kapalı */
+            background-color: #e0e0e0;
+            border-radius: 30px;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 16px;
+            color: #333;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .eye-icon {
+            cursor: pointer;
+            font-size: 30px;
+            transition: transform 0.2s;
+        }
+        .eye-icon.hidden {
+            color: rgba(0, 0, 0, 0.5); /* Soluk renk */
+        }
+        .eye-icon.visible {
+            color: #000; /* Normal renk */
+        }
+        .resim-sayisi {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+        .menu-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+            position: relative;
+        }
+        .menu-icon {
+            cursor: pointer;
+            font-size: 24px;
+            color: #007BFF;
+            background: none;
+            border: none;
+            padding: 5px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            transition: background 0.2s, transform 0.2s;
+        }
+        .menu-icon:hover {
+            background: rgba(0, 123, 255, 0.1);
+            transform: scale(1.1);
+        }
+        .menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            text-align: center;
+        }
+        .menu a {
+            display: block;
+            padding: 20px;
+            text-decoration: none;
+            color: white;
+            font-size: 24px;
+            transition: background 0.2s;
+        }
+        .menu a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <h1>Tehlike Uyarı İşaretleri</h1>
+
+    <div class="container">
+        <img id="levhaResmi" src="img/1.jpg" alt="Sağa Tehlikeli Viraj" class="levha">
+        <div class="watermark">@ehliyetcenkhoca</div> <!-- Watermark Eklendi -->
+        
+        <div class="anlam" id="levhaAnlami">
+            Sağa Tehlikeli Viraj
+        </div>
+
+        <div class="buttons">
+            <button id="geriButonu" onclick="oncekiLevha()" disabled>
+                &#9664;  <!-- Sol ok simgesi -->
+            </button>
+            <div class="eye-icon" id="gözButonu" onclick="anlamiGoster()">
+                👁️
+            </div>
+            <button id="ileriButonu" onclick="sonrakiLevha()">
+                &#9654;  <!-- Sağ ok simgesi -->
+            </button>
+        </div>
+        <div id="resimSayisi" class="resim-sayisi"></div>
+    </div>
+
+    <div class="menu-container">
+        <button class="menu-icon" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="menu" id="menu">
+            <div class="close-menu" onclick="toggleMenu()">✖️</div>
+            <a href="https://ehliyetsorulari.net">Anasayfa</a>
+            <a href="tehlike-uyari-isaretleri.html">Tehlike Uyarı İşaretleri</a>
+            <a href="trafik-tanzim-isaretleri.html">Trafik Tanzim İşaretleri</a>
+            <a href="duraklama-ve-park-etme-isaretleri.html">Duraklama ve Park Etme İşaretleri</a>
+			<a href="otoyol-isaretleri.html">Otoyol İşaretleri</a>
+			<a href="yapim-bakim-ve-onerim-isaretleri.html">Yapım Bakım ve Onarım İşaretleri</a>
+			<a href="trafik-polisi-isaretleri.html">Trafik Görevlisinin İşaretleri</a>
+			<a href="arac-gosterge-isaretleri.html">Araç Gösterge İşaretleri</a>
+			<a href="https://ehliyetsorulari.net/ehliyet-sinav-sorulari/">Ehliyet Sınav Soruları çöz</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    let anlamGorunuyor = false;
+
+    function toggleMenu() {
+        const menu = document.getElementById("menu");
+        menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    }
+
+    const levhalar = [
+    { "resim": "img/tehlike/1.jpg", "anlam": "Sağa Tehlikeli Viraj" },
+    { "resim": "img/tehlike/2.jpg", "anlam": "Sola Tehlikeli Viraj" },
+    { "resim": "img/tehlike/3.jpg", "anlam": "Sağa Tehlikeli Devamlı Virajlar" },
+    { "resim": "img/tehlike/4.jpg", "anlam": "Sola Tehlikeli Devamlı Virajlar" },
+    { "resim": "img/tehlike/5.jpg", "anlam": "Tehlikeli Eğim (İniş)" },
+    { "resim": "img/tehlike/6.jpg", "anlam": "Tehlikeli Eğim (Çıkış)" },
+    { "resim": "img/tehlike/7.jpg", "anlam": "Her İki Taraftan Daralan Kaplama" },
+    { "resim": "img/tehlike/8.jpg", "anlam": "Sağdan Daralan Kaplama" },
+    { "resim": "img/tehlike/9.jpg", "anlam": "Soldan Daralan Kaplama" },
+    { "resim": "img/tehlike/10.jpg", "anlam": "Açılan Köprü" },
+    { "resim": "img/tehlike/11.jpg", "anlam": "Deniz ve Nehir Kıyısında Biten Yol" },
+    { "resim": "img/tehlike/12.jpg", "anlam": "Kasisli Yol" },
+    { "resim": "img/tehlike/13.jpg", "anlam": "Kaygan Yol" },
+    { "resim": "img/tehlike/14.jpg", "anlam": "Gevşek Malzemeli Zemin" },
+    { "resim": "img/tehlike/15.jpg", "anlam": "Gevşek Şev" },
+    { "resim": "img/tehlike/16.jpg", "anlam": "Yaya Geçidi Yaklaşım" },
+    { "resim": "img/tehlike/17.jpg", "anlam": "Okul Geçidi" },
+    { "resim": "img/tehlike/18.jpg", "anlam": "Bisiklet Geçebilir" },
+    { "resim": "img/tehlike/19.jpg", "anlam": "Ehli Hayvanlar Geçebilir" },
+    { "resim": "img/tehlike/20.jpg", "anlam": "Vahşi Hayvanlar Geçebilir" },
+    { "resim": "img/tehlike/21.jpg", "anlam": "Yolda Çalışma" },
+    { "resim": "img/tehlike/22.jpg", "anlam": "Işıklı İşaret Cihazı" },
+    { "resim": "img/tehlike/23.jpg", "anlam": "Havalimanı Alçak Uçuş" },
+    { "resim": "img/tehlike/24.jpg", "anlam": "Yandan Rüzgâr" },
+    { "resim": "img/tehlike/25.jpg", "anlam": "İki Yönlü Trafik" },
+    { "resim": "img/tehlike/26.jpg", "anlam": "Dikkat Levhası" },
+    { "resim": "img/tehlike/27.jpg", "anlam": "Kontrolsüz Kavşak Levhası" },
+    { "resim": "img/tehlike/28.jpg", "anlam": "Ana Yol Tali Yol Kavşağı" },
+    { "resim": "img/tehlike/29.jpg", "anlam": "Ana Yol Tali Yol Kavşağı Sağa Giriş" },
+    { "resim": "img/tehlike/30.jpg", "anlam": "Ana Yol Tali Yol Kavşağı Sola Giriş" },
+    { "resim": "img/tehlike/31.jpg", "anlam": "Ana Yol Tali Yol Kavşağı" },
+    { "resim": "img/tehlike/32.jpg", "anlam": "Ana Yol Tali Yol Kavşağı" },
+    { "resim": "img/tehlike/33.jpg", "anlam": "Sağdan Ana Yola Giriş" },
+    { "resim": "img/tehlike/34.jpg", "anlam": "Soldan Ana Yola Giriş" },
+    { "resim": "img/tehlike/35.jpg", "anlam": "Dönel Kavşak" },
+    { "resim": "img/tehlike/36.jpg", "anlam": "Kontrollü Demir Yolu Geçidi" },
+    { "resim": "img/tehlike/37.jpg", "anlam": "Kontrolsüz Demir Yolu Geçidi" },
+    { "resim": "img/tehlike/38.jpg", "anlam": "Kontrolsüz Demir Yolu Geçidi (Tek Hat)" },
+    { "resim": "img/tehlike/39.jpg", "anlam": "Kontrolsüz Demir Yolu Geçidi (En Az 2 Hat)" },
+    { "resim": "img/tehlike/40.jpg", "anlam": "Demiryolu Geçidi Yaklaşım Sağ (300metre)" },
+    { "resim": "img/tehlike/41.jpg", "anlam": "Demir Yolu Geçidi Yaklaşım Sol (300metre)" },
+    { "resim": "img/tehlike/42.jpg", "anlam": "Demiryolu Geçidi Yaklaşım Sağ (200metre)" },
+    { "resim": "img/tehlike/43.webp", "anlam": "Demir Yolu Geçidi Yaklaşım Sol (200metre)" },
+    { "resim": "img/tehlike/44.jpg", "anlam": "Demir Yolu Geçidi Yaklaşım Sağ (100metre)" },
+    { "resim": "img/tehlike/45.jpg", "anlam": "Demiryolu Geçidi Yaklaşım Sol (100metre)" },
+    { "resim": "img/tehlike/46.webp", "anlam": "Köprü Başı Sağ" },
+    { "resim": "img/tehlike/47.jpg", "anlam": "Köprü Başı Sol" },
+    { "resim": "img/tehlike/48.webp", "anlam": "Engel İşareti" },
+    { "resim": "img/tehlike/49.webp", "anlam": "Tehlikeli Viraj Yön" },
+    { "resim": "img/tehlike/50.jpg", "anlam": "Tehlikeli Viraj" },
+    { "resim": "img/tehlike/51.jpg", "anlam": "Onarım Yaklaşım Sağ" },
+    { "resim": "img/tehlike/52.webp", "anlam": "Onarım Yaklaşım Sol" },
+    { "resim": "img/tehlike/53.webp", "anlam": "Onarım Yaklaşım" },
+    { "resim": "img/tehlike/54.jpg", "anlam": "Refüj Başı Ek" },
+    { "resim": "img/tehlike/55.jpg", "anlam": "Refüj Başı Ek" },
+    { "resim": "img/tehlike/56.jpg", "anlam": "Dönüş Adası Ek" },
+    { "resim": "img/tehlike/57.jpg", "anlam": "Düşük Banket" },
+    { "resim": "img/tehlike/58.jpg", "anlam": "Gizli Buzlanma" },
+    { "resim": "img/tehlike/59.jpg", "anlam": "Trafik Sıkışıklığı" },
+    { "resim": "img/tehlike/60.jpg", "anlam": "Tramvay Hattı ile Oluşan Kavşak" },
+    { "resim": "img/tehlike/61.jpg", "anlam": "Dikkat Kapan Var" }
+]
+;
+
+    let mevcutLevhaIndex = 0;
+
+    function guncelleLevha() {
+        const levhaResmi = document.getElementById("levhaResmi");
+        const levhaAnlami = document.getElementById("levhaAnlami");
+        const resimSayisi = document.getElementById("resimSayisi");
+        const gözButonu = document.getElementById("gözButonu");
+
+        levhaResmi.src = levhalar[mevcutLevhaIndex].resim;
+        levhaAnlami.textContent = levhalar[mevcutLevhaIndex].anlam;
+        resimSayisi.textContent = `${mevcutLevhaIndex + 1} / ${levhalar.length}`;
+
+        document.getElementById("geriButonu").disabled = mevcutLevhaIndex === 0;
+        document.getElementById("ileriButonu").disabled = mevcutLevhaIndex === levhalar.length - 1;
+
+        // Anlamı her tıkladığında açıp kapat
+        levhaAnlami.style.visibility = anlamGorunuyor ? "visible" : "hidden";
+
+        // Göz ikonunun durumunu güncelle
+        gözButonu.className = anlamGorunuyor ? "eye-icon visible" : "eye-icon hidden";
+    }
+
+    function oncekiLevha() {
+        if (mevcutLevhaIndex > 0) {
+            mevcutLevhaIndex--;
+            anlamGorunuyor = false; // Her geçişte anlam kapalı olmalı
+            guncelleLevha();
+        }
+    }
+
+    function sonrakiLevha() {
+        if (mevcutLevhaIndex < levhalar.length - 1) {
+            mevcutLevhaIndex++;
+            anlamGorunuyor = false; // Her geçişte anlam kapalı olmalı
+            guncelleLevha();
+        }
+    }
+
+    function anlamiGoster() {
+        anlamGorunuyor = !anlamGorunuyor;
+        guncelleLevha();
+    }
+
+    guncelleLevha();
+</script>
+
+</body>
+</html>
