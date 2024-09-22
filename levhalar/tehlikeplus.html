@@ -32,7 +32,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 90%;
             max-width: 400px;
-            margin: 30px auto; /* Sayfanın en üstüne taşındı */
+            margin: 30px auto; 
         }
 
         .image {
@@ -52,10 +52,10 @@
             border-radius: 5px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
             height: 50px;
-            display: flex; /* Sabit kaldı */
+            display: flex;
             align-items: center;
             justify-content: center;
-            visibility: hidden; /* Gizli başlıyor */
+            visibility: hidden;
         }
 
         .button-group {
@@ -63,14 +63,14 @@
             justify-content: center;
             align-items: center;
             margin-top: 20px;
-            gap: 40px; /* Butonlar arası boşluk artırıldı */
+            gap: 30px;
         }
 
         .nav-btn {
             background-color: transparent;
             border: none;
             color: #333;
-            font-size: 35px; /* Buton boyutu büyütüldü */
+            font-size: 35px;
             cursor: pointer;
             padding: 10px;
             transition: color 0.3s;
@@ -84,7 +84,7 @@
             background-color: #9b59b6;
             border: none;
             color: white;
-            padding: 10px 20px; /* Elips şeklinde olacak şekilde boyutlandırıldı */
+            padding: 10px 20px;
             font-size: 20px;
             border-radius: 25px;
             cursor: pointer;
@@ -99,7 +99,7 @@
         }
 
         .toggle-btn i {
-            font-size: 22px; /* Göz ikon boyutu büyütüldü */
+            font-size: 22px;
         }
 
         .page-number {
@@ -108,33 +108,47 @@
             color: #333;
         }
 
+        /* Mobil uyumluluk */
         @media only screen and (max-width: 768px) {
             h1 {
                 font-size: 20px;
+                padding: 10px;
             }
 
             .container {
-                width: 100%;
-                padding: 15px;
+                padding: 10px;
             }
 
             .image {
-                max-width: 100%;
+                max-width: 80%; /* Mobilde biraz daha küçüldü */
             }
 
             .nav-btn {
-                font-size: 30px;
+                font-size: 25px; /* Mobil için biraz küçültüldü */
+            }
+
+            .toggle-btn {
+                padding: 8px 15px; /* Mobilde biraz daha küçüldü */
+                font-size: 18px;
             }
 
             .toggle-btn i {
-                font-size: 18px;
+                font-size: 20px; /* Göz ikon boyutu mobilde biraz daha küçültüldü */
+            }
+
+            .button-group {
+                gap: 20px; /* Mobilde butonlar biraz daha yakınlaştırıldı */
+            }
+
+            .caption {
+                font-size: 16px; /* Mobilde yazı boyutu küçüldü */
             }
         }
     </style>
 </head>
 <body>
 
-    <h1>Trafik İşaretleri</h1> <!-- Dışarı başlık eklendi ve arka plan ayarlandı -->
+    <h1>Trafik İşaretleri</h1> <!-- Başlık arka planı ve stil ayarlandı -->
     <div class="container">
         <img id="trafficSign" src="" alt="Tehlike işareti" class="image">
         <div class="caption" id="caption">Anlam</div>
