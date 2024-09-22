@@ -8,22 +8,17 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
+            padding: 0;
             background-color: #f0f0f0;
-            flex-direction: column;
         }
 
         h1 {
-            margin-bottom: 20px;
+            margin: 0;
+            padding: 15px;
             font-size: 24px;
             color: #fff;
             background-color: #3498db;
-            padding: 10px;
-            width: 100%;
             text-align: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 0 0 15px 15px;
@@ -37,7 +32,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 90%;
             max-width: 400px;
-            position: relative;
+            margin: 30px auto; /* Sayfanın en üstüne taşındı */
         }
 
         .image {
@@ -57,9 +52,10 @@
             border-radius: 5px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
             height: 50px;
-            display: none;
+            display: flex; /* Sabit kaldı */
             align-items: center;
             justify-content: center;
+            visibility: hidden; /* Gizli başlıyor */
         }
 
         .button-group {
@@ -89,8 +85,8 @@
             border: none;
             color: white;
             padding: 10px 20px; /* Elips şeklinde olacak şekilde boyutlandırıldı */
-            font-size: 20px; /* Biraz büyütüldü */
-            border-radius: 25px; /* Elips şekli verildi */
+            font-size: 20px;
+            border-radius: 25px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -178,12 +174,12 @@
             var eyeIcon = document.getElementById("eyeIcon");
 
             if (isCaptionVisible) {
-                caption.style.display = "none"; // Anlamı gizle
+                caption.style.visibility = "hidden"; // Anlamı gizle
                 eyeIcon.classList.remove("fa-eye");
                 eyeIcon.classList.add("fa-eye-slash"); // Göz kapalı ikonu
                 isCaptionVisible = false;
             } else {
-                caption.style.display = "flex"; // Anlamı göster
+                caption.style.visibility = "visible"; // Anlamı göster
                 eyeIcon.classList.remove("fa-eye-slash");
                 eyeIcon.classList.add("fa-eye"); // Göz açık ikonu
                 isCaptionVisible = true;
@@ -214,7 +210,7 @@
             document.getElementById("caption").innerHTML = images[currentIndex].anlam;
 
             // Anlamı gizli başlat
-            document.getElementById("caption").style.display = "none";
+            document.getElementById("caption").style.visibility = "hidden";
             document.getElementById("eyeIcon").classList.remove("fa-eye");
             document.getElementById("eyeIcon").classList.add("fa-eye-slash"); // Göz kapalı
             isCaptionVisible = false;
