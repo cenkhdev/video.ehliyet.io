@@ -13,29 +13,26 @@
             background-color: #f0f0f0;
         }
 
-        h1 {
-            margin: 0;
-            padding: 15px;
-            font-size: 24px;
-            color: #fff;
+        .navbar {
             background-color: #3498db;
-            text-align: left;
-            padding-left: 20px;
-            display: inline-block;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Hamburger menü için */
+        .navbar h1 {
+            margin: 0;
+            font-size: 20px;
+        }
+
         .menu-icon {
-            position: absolute;
-            top: 15px;
-            right: 20px;
             font-size: 28px;
-            color: white;
             cursor: pointer;
-            z-index: 10;
         }
 
-        /* Gizli menü */
         .menu {
             position: fixed;
             top: 0;
@@ -110,7 +107,7 @@
             background-color: transparent;
             border: none;
             color: #333;
-            font-size: 45px; /* Butonlar büyütüldü */
+            font-size: 45px;
             cursor: pointer;
             padding: 10px;
             transition: color 0.3s;
@@ -124,8 +121,8 @@
             background-color: #9b59b6;
             border: none;
             color: white;
-            padding: 10px 25px; /* Biraz daha genişletildi */
-            font-size: 25px; /* Biraz daha büyütüldü */
+            padding: 10px 25px;
+            font-size: 25px;
             border-radius: 25px;
             cursor: pointer;
             display: flex;
@@ -148,44 +145,12 @@
             color: #333;
         }
 
-        /* Mobil uyumluluk */
         @media only screen and (max-width: 768px) {
-            h1 {
-                font-size: 20px;
-                padding: 10px;
-            }
-
-            .container {
-                padding: 10px;
-            }
-
-            .image {
-                max-width: 80%;
-            }
-
-            .nav-btn {
-                font-size: 35px; /* Mobilde bir tık küçüldü */
-            }
-
-            .toggle-btn {
-                padding: 8px 15px;
-                font-size: 22px; /* Mobilde biraz küçüldü */
-            }
-
-            .toggle-btn i {
-                font-size: 20px;
-            }
-
-            .button-group {
-                gap: 20px;
-            }
-
-            .caption {
+            .navbar h1 {
                 font-size: 16px;
             }
         }
 
-        /* Menü açıldığında sınıf ekleyerek görünür hale getirme */
         .menu.open {
             right: 0;
         }
@@ -193,13 +158,13 @@
 </head>
 <body>
 
-    <!-- Başlık ve Hamburger Menü -->
-    <h1>Trafik İşaretleri</h1>
-    <div class="menu-icon" onclick="toggleMenu()">
-        <i class="fas fa-bars"></i>
+    <div class="navbar">
+        <h1>Trafik İşaretleri</h1>
+        <div class="menu-icon" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
     </div>
 
-    <!-- Gizli Menü -->
     <div id="menu" class="menu">
         <a href="#">Tanzim İşaretleri</a>
         <a href="#">Tehlike İşaretleri</a>
@@ -221,13 +186,11 @@
     </div>
 
     <script>
-        // Menü aç/kapa fonksiyonu
         function toggleMenu() {
             var menu = document.getElementById("menu");
             menu.classList.toggle("open");
         }
 
-        // Resimler ve anlamları
         const images = [
             { resim: "img/tehlike/1.jpg", anlam: "Sağa Tehlikeli Viraj" },
             { resim: "img/tehlike/2.jpg", anlam: "Sola Tehlikeli Viraj" },
@@ -238,32 +201,29 @@
         let currentIndex = 0;
         let isCaptionVisible = false;
 
-        // Sayfa yüklendiğinde ilk resmi ve anlamı göster
         window.onload = function() {
             document.getElementById("trafficSign").src = images[currentIndex].resim;
             document.getElementById("caption").innerHTML = images[currentIndex].anlam;
             updatePageNumber();
         };
 
-        // Anlam göster/gizle fonksiyonu
         function toggleCaption() {
             var caption = document.getElementById("caption");
             var eyeIcon = document.getElementById("eyeIcon");
 
             if (isCaptionVisible) {
-                caption.style.visibility = "hidden"; // Anlamı gizle
+                caption.style.visibility = "hidden";
                 eyeIcon.classList.remove("fa-eye");
-                eyeIcon.classList.add("fa-eye-slash"); // Göz kapalı ikonu
+                eyeIcon.classList.add("fa-eye-slash");
                 isCaptionVisible = false;
             } else {
-                caption.style.visibility = "visible"; // Anlamı göster
+                caption.style.visibility = "visible";
                 eyeIcon.classList.remove("fa-eye-slash");
-                eyeIcon.classList.add("fa-eye"); // Göz açık ikonu
+                eyeIcon.classList.add("fa-eye");
                 isCaptionVisible = true;
             }
         }
 
-        // Önceki resmi gösterme fonksiyonu
         function previousImage() {
             currentIndex--;
             if (currentIndex < 0) {
@@ -272,7 +232,6 @@
             updateImageAndCaption();
         }
 
-        // Sonraki resmi gösterme fonksiyonu
         function nextImage() {
             currentIndex++;
             if (currentIndex >= images.length) {
@@ -281,20 +240,16 @@
             updateImageAndCaption();
         }
 
-        // Resmi ve anlamı güncelle
         function updateImageAndCaption() {
             document.getElementById("trafficSign").src = images[currentIndex].resim;
             document.getElementById("caption").innerHTML = images[currentIndex].anlam;
-
-            // Anlamı gizli başlat
             document.getElementById("caption").style.visibility = "hidden";
             document.getElementById("eyeIcon").classList.remove("fa-eye");
-            document.getElementById("eyeIcon").classList.add("fa-eye-slash"); // Göz kapalı
+            document.getElementById("eyeIcon").classList.add("fa-eye-slash");
             isCaptionVisible = false;
             updatePageNumber();
         }
 
-        // Sayfa numarasını güncelle
         function updatePageNumber() {
             document.getElementById("pageNumber").innerHTML = (currentIndex + 1) + " / " + images.length;
         }
