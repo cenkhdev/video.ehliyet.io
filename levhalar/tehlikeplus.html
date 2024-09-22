@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trafik İşaretleri</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .image {
+            display: block;
+            margin: 0 auto;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 250px;
+            height: auto;
+        }
+
+        .caption {
+            margin-top: 10px;
+            font-size: 18px;
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            height: 50px; /* Sabit yükseklik verildi */
+            display: none; /* Başlangıçta gizli */
+            align-items: center;
+            justify-content: center;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .nav-btn {
+            background-color: transparent;
+            border: none;
+            color: #333;
+            font-size: 30px;
+            cursor: pointer;
+            padding: 10px;
+            transition: color 0.3s;
+        }
+
+        .nav-btn:hover {
+            color: #555;
+        }
+
+        .toggle-btn {
+            background-color: #9b59b6;
+            border: none;
+            color: white;
+            padding: 15px;
+            font-size: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            transition: background-color 0.3s ease;
+        }
+
+        .toggle-btn:hover {
+            background-color: #8e44ad;
+        }
+
+        .toggle-btn i {
+            font-size: 24px;
+        }
+
+        .page-number {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .container {
+                width: 100%;
+                padding: 15px;
+            }
+
+            .image {
+                max-width: 100%;
+            }
+
+            .nav-btn {
+                font-size: 24px;
+            }
+
+            .toggle-btn i {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img id="trafficSign" src="" alt="Tehlike işareti" class="image">
+        <div class="caption" id="caption">Anlam</div>
+
+        <div class="button-group">
+            <button class="nav-btn" onclick="previousImage()">◀</button>
+            <button class="toggle-btn" onclick="toggleCaption()">
+                <i id="eyeIcon" class="fas fa-eye-slash"></i>
+            </button>
+            <button class="nav-btn" onclick="nextImage()">▶</button>
+        </div>
+        <div class="page-number" id="pageNumber">1 / 61</div>
+    </div>
+
+    <script>
+        // Resimler ve anlamları
+        const images = [
+            { resim: "img/tehlike/1.jpg", anlam: "Sağa Tehlikeli Viraj" },
+            { resim: "img/tehlike/2.jpg", anlam: "Sola Tehlikeli Viraj" },
+            { resim: "img/tehlike/3.jpg", anlam: "Tehlikeli Eğim (Çıkış)" },
+            { resim: "img/tehlike/4.jpg", anlam: "Tehlikeli Eğim (İniş)" }
+        ];
+
+        let currentIndex = 0;
+        let isCaptionVisible = false; // Anlam başlangıçta kapalı
+
+        // Sayfa yüklendiğinde ilk resmi ve anlamı göster
+        window.onload = function() {
+            document.getElementById("trafficSign").src = images[currentIndex].resim;
+            document.getElementById("caption").innerHTML = images[currentIndex].anlam;
+            updatePageNumber();
+        };
+
+        // Anlam göster/gizle fonksiyonu
+        function toggleCaption() {
+            var caption = document.getElementById("caption");
+            var eyeIcon = document.getElementById("eyeIcon");
+
+            if (isCaptionVisible) {
+                caption.style.display = "none"; // Anlamı gizle
+                eyeIcon.classList.remove("fa-eye");
+                eyeIcon.classList.add("fa-eye-slash"); // Göz kapalı ikonu
+                isCaptionVisible = false;
+            } else {
+                caption.style.display = "flex"; // Anlamı göster
+                eyeIcon.classList.remove("fa-eye-slash");
+                eyeIcon.classList.add("fa-eye"); // Göz açık ikonu
+                isCaptionVisible = true;
+            }
+        }
+
+        // Önceki resmi gösterme fonksiyonu
+        function previousImage() {
+            currentIndex--;
+            if (currentIndex < 0) {
+                currentIndex = images.length - 1;
+            }
+            updateImageAndCaption();
+        }
+
+        // Sonraki resmi gösterme fonksiyonu
+        function nextImage() {
+            currentIndex++;
+            if (currentIndex >= images.length) {
+                currentIndex = 0;
+            }
+            updateImageAndCaption();
+        }
+
+        // Resmi ve anlamı güncelle
+        function updateImageAndCaption() {
+            document.getElementById("trafficSign").src = images[currentIndex].resim;
+            document.getElementById("caption").innerHTML = images[currentIndex].anlam;
+
+            // Anlamı gizli başlat
+            document.getElementById("caption").style.display = "none";
+            document.getElementById("eyeIcon").classList.remove("fa-eye");
+            document.getElementById("eyeIcon").classList.add("fa-eye-slash"); // Göz kapalı
+            isCaptionVisible = false;
+            updatePageNumber();
+        }
+
+        // Sayfa numarasını güncelle
+        function updatePageNumber() {
+            document.getElementById("pageNumber").innerHTML = (currentIndex + 1) + " / " + images.length;
+        }
+    </script>
+
+</body>
+</html>
