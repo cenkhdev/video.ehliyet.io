@@ -154,6 +154,22 @@
         .menu.open {
             right: 0;
         }
+
+        /* Menü dışına tıklandığında kapatmak için sayfanın geri kalanı */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 8;
+            display: none;
+        }
+
+        .overlay.show {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -165,13 +181,16 @@
         </div>
     </div>
 
+    <!-- Menü kapandıktan sonra menü dışındaki bölgeye tıklama için overlay -->
+    <div id="overlay" class="overlay" onclick="closeMenu()"></div>
+
     <div id="menu" class="menu">
         <a href="#">Tanzim İşaretleri</a>
         <a href="#">Tehlike İşaretleri</a>
         <a href="#">Polisin Hareketleri</a>
     </div>
 
-    <div class="container" onclick="closeMenu()"> <!-- Menü dışına tıklandığında kapanması için onclick ekledim -->
+    <div class="container">
         <img id="trafficSign" src="" alt="Tehlike işareti" class="image">
         <div class="caption" id="caption">Anlam</div>
 
@@ -188,14 +207,21 @@
     <script>
         function toggleMenu() {
             var menu = document.getElementById("menu");
-            menu.classList.toggle("open");
+            var overlay = document.getElementById("overlay");
+            if (menu.classList.contains("open")) {
+                menu.classList.remove("open");
+                overlay.classList.remove("show");
+            } else {
+                menu.classList.add("open");
+                overlay.classList.add("show");
+            }
         }
 
         function closeMenu() {
             var menu = document.getElementById("menu");
-            if (menu.classList.contains("open")) {
-                menu.classList.remove("open");
-            }
+            var overlay = document.getElementById("overlay");
+            menu.classList.remove("open");
+            overlay.classList.remove("show");
         }
 
         const images = [
