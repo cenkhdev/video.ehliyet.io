@@ -171,7 +171,7 @@
         <a href="#">Polisin Hareketleri</a>
     </div>
 
-    <div class="container">
+    <div class="container" onclick="closeMenu()"> <!-- Menü dışına tıklandığında kapanması için onclick ekledim -->
         <img id="trafficSign" src="" alt="Tehlike işareti" class="image">
         <div class="caption" id="caption">Anlam</div>
 
@@ -189,6 +189,13 @@
         function toggleMenu() {
             var menu = document.getElementById("menu");
             menu.classList.toggle("open");
+        }
+
+        function closeMenu() {
+            var menu = document.getElementById("menu");
+            if (menu.classList.contains("open")) {
+                menu.classList.remove("open");
+            }
         }
 
         const images = [
