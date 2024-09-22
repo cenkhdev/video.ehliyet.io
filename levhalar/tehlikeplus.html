@@ -19,9 +19,49 @@
             font-size: 24px;
             color: #fff;
             background-color: #3498db;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            /* border-radius: 0 0 15px 15px;  <-- Bu satır kaldırıldı, başlık artık elips değil */
+            text-align: left;
+            padding-left: 20px;
+            display: inline-block;
+        }
+
+        /* Hamburger menü için */
+        .menu-icon {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            color: white;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        /* Gizli menü */
+        .menu {
+            position: fixed;
+            top: 0;
+            right: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #34495e;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding-top: 60px;
+            transition: right 0.3s ease;
+            z-index: 9;
+        }
+
+        .menu a {
+            padding: 15px;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            text-align: left;
+            padding-left: 20px;
+        }
+
+        .menu a:hover {
+            background-color: #2c3e50;
         }
 
         .container {
@@ -32,7 +72,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 90%;
             max-width: 400px;
-            margin: 30px auto; 
+            margin: 30px auto;
         }
 
         .image {
@@ -70,7 +110,7 @@
             background-color: transparent;
             border: none;
             color: #333;
-            font-size: 35px;
+            font-size: 45px; /* Butonlar büyütüldü */
             cursor: pointer;
             padding: 10px;
             transition: color 0.3s;
@@ -84,8 +124,8 @@
             background-color: #9b59b6;
             border: none;
             color: white;
-            padding: 10px 20px;
-            font-size: 20px;
+            padding: 10px 25px; /* Biraz daha genişletildi */
+            font-size: 25px; /* Biraz daha büyütüldü */
             border-radius: 25px;
             cursor: pointer;
             display: flex;
@@ -99,12 +139,12 @@
         }
 
         .toggle-btn i {
-            font-size: 22px;
+            font-size: 24px;
         }
 
         .page-number {
             margin-top: 5px;
-            font-size: 14px;
+            font-size: 16px;
             color: #333;
         }
 
@@ -120,35 +160,52 @@
             }
 
             .image {
-                max-width: 80%; /* Mobilde biraz daha küçüldü */
+                max-width: 80%;
             }
 
             .nav-btn {
-                font-size: 25px; /* Mobil için biraz küçültüldü */
+                font-size: 35px; /* Mobilde bir tık küçüldü */
             }
 
             .toggle-btn {
-                padding: 8px 15px; /* Mobilde biraz daha küçüldü */
-                font-size: 18px;
+                padding: 8px 15px;
+                font-size: 22px; /* Mobilde biraz küçüldü */
             }
 
             .toggle-btn i {
-                font-size: 20px; /* Göz ikon boyutu mobilde biraz daha küçültüldü */
+                font-size: 20px;
             }
 
             .button-group {
-                gap: 20px; /* Mobilde butonlar biraz daha yakınlaştırıldı */
+                gap: 20px;
             }
 
             .caption {
-                font-size: 16px; /* Mobilde yazı boyutu küçüldü */
+                font-size: 16px;
             }
+        }
+
+        /* Menü açıldığında sınıf ekleyerek görünür hale getirme */
+        .menu.open {
+            right: 0;
         }
     </style>
 </head>
 <body>
 
-    <h1>Trafik İşaretleri</h1> <!-- Başlık arka planı düzleştirildi -->
+    <!-- Başlık ve Hamburger Menü -->
+    <h1>Trafik İşaretleri</h1>
+    <div class="menu-icon" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <!-- Gizli Menü -->
+    <div id="menu" class="menu">
+        <a href="#">Tanzim İşaretleri</a>
+        <a href="#">Tehlike İşaretleri</a>
+        <a href="#">Polisin Hareketleri</a>
+    </div>
+
     <div class="container">
         <img id="trafficSign" src="" alt="Tehlike işareti" class="image">
         <div class="caption" id="caption">Anlam</div>
@@ -164,6 +221,12 @@
     </div>
 
     <script>
+        // Menü aç/kapa fonksiyonu
+        function toggleMenu() {
+            var menu = document.getElementById("menu");
+            menu.classList.toggle("open");
+        }
+
         // Resimler ve anlamları
         const images = [
             { resim: "img/tehlike/1.jpg", anlam: "Sağa Tehlikeli Viraj" },
@@ -173,7 +236,7 @@
         ];
 
         let currentIndex = 0;
-        let isCaptionVisible = false; // Anlam başlangıçta kapalı
+        let isCaptionVisible = false;
 
         // Sayfa yüklendiğinde ilk resmi ve anlamı göster
         window.onload = function() {
