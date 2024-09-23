@@ -3,226 +3,275 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trafik Polisi İşaretleri: Anlamları ve Kullanımları</title>
     
-
-     <title>Trafik Polisi İşaretleri: Anlamları ve Kullanımları</title>
+    <!-- SEO Meta Tags -->
     <meta name="description" content="Trafik polisi işaretleri, trafik akışını düzenlemek ve sürücülere yönlendirme yapmak için kullanılır. Bu sayfada, farklı trafik polisi işaretlerinin anlamları ve nasıl kullanıldığı hakkında detaylı bilgi bulabilirsiniz.">
     <meta name="keywords" content="trafik polisi işaretleri, trafik işaretleri, trafik güvenliği, trafik düzenleme, sürücü yönlendirme, trafik işaretleri anlamları">
     <meta property="og:title" content="Trafik Polisi İşaretleri: Anlamları ve Kullanımları">
     <meta property="og:description" content="Trafik polisi işaretleri, trafik akışını düzenlemek ve sürücülere yönlendirme yapmak için kullanılır.">
     <meta property="og:url" content="http://www.orneksite.com/trafik-polis-isaretleri">
-    <meta property="og:image" content="img/polis/polis.jpg"> <!-- Örnek resim -->
+    <meta property="og:image" content="img/tehlike/1.jpg"> <!-- Örnek resim -->
+    <meta property="og:type" content="website">
+	
+	
+     <meta name="author" content="Ehliyetcenkhoca">
+    
+    <!-- Open Graph (OG) Tags for social media preview -->
+    <meta property="og:title" content="Trafik Polisi İşaretleri: Anlamları ve Kullanımları">
+    <meta property="og:description" content="Trafikte karşınıza çıkan Trafik Polisi İşaretleri: Anlamları ve Kullanımları anlamlarını öğrenin. Sağa tehlikeli viraj, sola tehlikeli viraj, tehlikeli eğim gibi levhalar.">
+    <meta property="og:image" content="img/tehlike/screenshot-tehlike-isaretleri.jpg">
+    <meta property="og:url" content="https://ehliyetsorulari.net">
     <meta property="og:type" content="website">
 
-	
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- Twitter Card Tags for better sharing on Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Trafik Polisi İşaretleri: Anlamları ve Kullanımları">
+    <meta name="twitter:description" content="Trafik Polisi İşaretleri: Anlamları ve Kullanımları.">
+    <meta name="twitter:image" content="img/tehlike/screenshot-tehlike-isaretleri.jpg">
+
+    <!-- Site Icon (Favicon) -->
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+    <!-- Styles and other meta tags -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
             margin: 0;
-            padding-top: 40px;
+            padding: 0;
+            background-color: #f0f0f0;
         }
-        .wrapper {
-            text-align: center;
-            max-width: 96%;
-        }
-        h1 {
-            font-size: 28px;
-            color: #333;
-            background-color: #e9ecef;
+
+        .navbar {
+            background-color: #3498db;
+            color: #fff;
             padding: 10px 20px;
-            border-radius: 15px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            margin: 0 0 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
+        .navbar h1 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .menu-icon {
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .menu {
+            position: fixed;
+            top: 0;
+            right: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #34495e;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding-top: 60px;
+            transition: right 0.3s ease;
+            z-index: 9;
+        }
+
+        .menu a {
+            padding: 15px;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            text-align: left;
+            padding-left: 20px;
+        }
+
+        .menu a:hover {
+            background-color: #2c3e50;
+        }
+
         .container {
+            text-align: center;
             background-color: #fff;
+            padding: 20px;
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
+            width: 90%;
             max-width: 400px;
-            margin: 0 auto;
+            margin: 30px auto;
             position: relative;
         }
-        .levha {
-            width: 100%;
-            max-width: 250px;
-            margin: 0 auto;
-        }
+
         .watermark {
             position: absolute;
-            top: 50%; /* Dikey merkezleme */
-            left: 50%; /* Yatay merkezleme */
-            transform: translate(-50%, -50%); /* Merkeze yerleştirme */
-            color: rgba(0, 0, 0, 0.05); /* Daha soluk renk */
-            font-size: 20px;
-            pointer-events: none; /* Tıklanamaz olması için */
-            white-space: nowrap; /* Tek satırda kalması için */
+            top: 255px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.05);
+            pointer-events: none;
         }
-        .buttons {
+
+        .image {
+            display: block;
+            margin: 0 auto;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 250px;
+            height: auto;
+        }
+
+        .caption {
+            margin-top: 10px;
+            font-size: 18px;
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+        }
+
+        .button-group {
             display: flex;
             justify-content: center;
             align-items: center;
             margin-top: 20px;
+            gap: 30px;
         }
-        .buttons button {
+
+        .nav-btn {
+            background-color: transparent;
             border: none;
-            background: none;
+            color: #333;
+            font-size: 45px;
             cursor: pointer;
-            font-size: 28px;
-            transition: transform 0.2s, color 0.2s;
-            margin: 0 25px;
-        }
-        .buttons button:hover {
-            transform: scale(1.2);
-            color: #007BFF;
-        }
-        .anlam {
-            visibility: hidden; /* Başlangıçta kapalı */
-            background-color: #e0e0e0;
-            border-radius: 30px;
             padding: 10px;
-            margin-top: 10px;
-            font-size: 16px;
-            color: #333;
-            height: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            transition: color 0.3s;
         }
-        .eye-icon {
-            cursor: pointer;
-            font-size: 30px;
-            transition: transform 0.2s;
+
+        .nav-btn:hover {
+            color: #555;
         }
-        .eye-icon.hidden {
-            color: rgba(0, 0, 0, 0.5); /* Soluk renk */
-        }
-        .eye-icon.visible {
-            color: #000; /* Normal renk */
-        }
-        .resim-sayisi {
-            margin-top: 10px;
-            font-size: 16px;
-            color: #333;
-        }
-        .menu-container {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 10px;
-            position: relative;
-        }
-        .menu-icon {
-            cursor: pointer;
-            font-size: 24px;
-            color: #007BFF;
-            background: none;
+
+        .toggle-btn {
+            background-color: #9b59b6;
             border: none;
-            padding: 5px;
-            border-radius: 5px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-            transition: background 0.2s, transform 0.2s;
+            color: white;
+            padding: 10px 25px;
+            font-size: 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
         }
-        .menu-icon:hover {
-            background: rgba(0, 123, 255, 0.1);
-            transform: scale(1.1);
+
+        .toggle-btn:hover {
+            background-color: #8e44ad;
         }
-        .menu {
-            display: none;
+
+        .toggle-btn i {
+            font-size: 24px;
+        }
+
+        .page-number {
+            margin-top: 5px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .navbar h1 {
+                font-size: 16px;
+            }
+        }
+
+        .menu.open {
+            right: 0;
+        }
+
+        .overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 8;
+            display: none;
         }
-        .menu a {
+
+        .overlay.show {
             display: block;
-            padding: 20px;
-            text-decoration: none;
-            color: white;
-            font-size: 24px;
-            transition: background 0.2s;
-        }
-        .menu a:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        .close-menu {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 30px;
-            cursor: pointer;
-            color: red;
         }
     </style>
 </head>
 <body>
 
-<div class="wrapper">
-    <h1>Trafik Polisi İşaretleri</h1>
+    <div class="navbar">
+        <h1>Trafik İşaretleri</h1>
+        <div class="menu-icon" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+
+    <div id="overlay" class="overlay" onclick="closeMenu()"></div>
+
+    <div id="menu" class="menu">
+        <a href="trafik-isaretleri.html">Anasayfa</a>
+        <a href="tehlike-uyarı-isaretleri.html">Tehlike Uyarı İşaretleri</a>
+        <a href="trafik-tanzim-isaretleri.html">Trafik Tanzim İşaretleri</a>
+        <a href="bilgi-isaretleri.html">Bilgi İşaretleri</a>
+        <a href="duraklama-park-etme-isaretleri.html">Duraklama ve Park Etme İşaretleri</a>
+        <a href="otoyol-isaretleri.html">Otoyol İşaretleri</a>
+        <a href="yapim-bakim-onarim-isaretleri.html">Yapım Bakım ve Onarım İşaretleri</a>
+        <a href="trafik-polisinin-isaretleri.html">Trafik Polisinin Hareketleri</a>
+        <a href="arac-gosterge-isaretleri.html">Araç Gösterge İşaretleri</a>
+        <a href="https://ehliyetsorulari.net/ehliyet-sinav-sorulari/">Ehliyet Sınav Soruları Çöz</a>
+    </div>
 
     <div class="container">
-        <img id="levhaResmi" src="img/1.jpg" alt="Sağa Tehlikeli Viraj" class="levha">
-        <div class="watermark">@ehliyetcenkhoca</div> <!-- Watermark Eklendi -->
-        
-        <div class="anlam" id="levhaAnlami">
-            Sağa Tehlikeli Viraj
-        </div>
+        <div class="watermark">@ehliyetcenkhoca</div>
+        <img id="trafficSign" src="" alt="Tehlike işareti" class="image">
+        <div class="caption" id="caption">Anlam</div>
 
-        <div class="buttons">
-            <button id="geriButonu" onclick="oncekiLevha()" disabled>
-                &#9664;  <!-- Sol ok simgesi -->
+        <div class="button-group">
+            <button class="nav-btn" onclick="previousImage()">◀</button>
+            <button class="toggle-btn" onclick="toggleCaption()">
+                <i id="eyeIcon" class="fas fa-eye-slash"></i>
             </button>
-            <div class="eye-icon" id="gözButonu" onclick="anlamiGoster()">
-                👁️
-            </div>
-            <button id="ileriButonu" onclick="sonrakiLevha()">
-                &#9654;  <!-- Sağ ok simgesi -->
-            </button>
+            <button class="nav-btn" onclick="nextImage()">▶</button>
         </div>
-        <div id="resimSayisi" class="resim-sayisi"></div>
+        <div class="page-number" id="pageNumber">1 / 61</div>
     </div>
 
-    <div class="menu-container">
-        <button class="menu-icon" onclick="toggleMenu()">
-            <i class="fas fa-bars"></i>
-        </button>
-        <div class="menu" id="menu">
-            <div class="close-menu" onclick="toggleMenu()">✖️</div>
-            <a href="https://ehliyetsorulari.net">Anasayfa</a>
-            <a href="tehlike-uyari-isaretleri.html">Tehlike Uyarı İşaretleri</a>
-            <a href="trafik-tanzim-isaretleri.html">Trafik Tanzim İşaretleri</a>
-            <a href="duraklama-ve-park-etme-isaretleri.html">Duraklama ve Park Etme İşaretleri</a>
-			<a href="otoyol-isaretleri.html">Otoyol İşaretleri</a>
-			<a href="yapim-bakim-ve-onerim-isaretleri.html">Yapım Bakım ve Onarım İşaretleri</a>
-			<a href="trafik-polisi-isaretleri.html">Trafik Görevlisinin İşaretleri</a>
-			<a href="arac-gosterge-isaretleri.html">Araç Gösterge İşaretleri</a>
-			<a href="https://ehliyetsorulari.net/ehliyet-sinav-sorulari/">Ehliyet Sınav Soruları çöz</a>
-        </div>
-    </div>
-</div>
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("menu");
+            var overlay = document.getElementById("overlay");
+            if (menu.classList.contains("open")) {
+                menu.classList.remove("open");
+                overlay.classList.remove("show");
+            } else {
+                menu.classList.add("open");
+                overlay.classList.add("show");
+            }
+        }
 
-<script>
-    let anlamGorunuyor = false;
+        function closeMenu() {
+            var menu = document.getElementById("menu");
+            var overlay = document.getElementById("overlay");
+            menu.classList.remove("open");
+            overlay.classList.remove("show");
+        }
 
-    function toggleMenu() {
-        const menu = document.getElementById("menu");
-        menu.style.display = menu.style.display === "flex" ? "none" : "flex";
-    }
-
-    const levhalar = [
+        const images = [
     { "resim": "img/polis/1.jpg", "anlam": "Trafik görevlisinin duruş pozisyonuna göre önünde ve arkasındaki yollar trafiğe kapalı, sağ ve sol kol istikametindeki yollar trafiğe açıktır. Bu duruş pozisyonuna göre her iki kolda kapalı olabileceği gibi yere paralelde olabilir." },
     { "resim": "img/polis/2.jpg", "anlam": "Sağ taraftaki trafiğin sola, sol taraftaki trafiğin sağa gidebileceğini gösterir." },
     { "resim": "img/polis/3.jpg", "anlam": "Trafiğin bütün istikametlere kapatıldığının sağ ve sol kol ile gösterimidir." },
@@ -236,53 +285,64 @@
     { "resim": "img/polis/11.jpg", "anlam": "Görevlinin kavşak idaresini kontrolü altına alma işaretidir." },
     { "resim": "img/polis/12.jpg", "anlam": "Görevlinin trafik akımını ışık idaresine bırakması işaretidir." }
 ]
-;
+            ;
 
-    let mevcutLevhaIndex = 0;
+        let currentIndex = 0;
+        let isCaptionVisible = false;
 
-    function guncelleLevha() {
-        const levhaResmi = document.getElementById("levhaResmi");
-        const levhaAnlami = document.getElementById("levhaAnlami");
-        const resimSayisi = document.getElementById("resimSayisi");
-        const gözButonu = document.getElementById("gözButonu");
+        window.onload = function() {
+            document.getElementById("trafficSign").src = images[currentIndex].resim;
+            document.getElementById("caption").innerHTML = images[currentIndex].anlam;
+            updatePageNumber();
+        };
 
-        levhaResmi.src = levhalar[mevcutLevhaIndex].resim;
-        levhaAnlami.textContent = levhalar[mevcutLevhaIndex].anlam;
-        resimSayisi.textContent = `${mevcutLevhaIndex + 1} / ${levhalar.length}`;
+        function toggleCaption() {
+            var caption = document.getElementById("caption");
+            var eyeIcon = document.getElementById("eyeIcon");
 
-        document.getElementById("geriButonu").disabled = mevcutLevhaIndex === 0;
-        document.getElementById("ileriButonu").disabled = mevcutLevhaIndex === levhalar.length - 1;
-
-        // Anlamı her tıkladığında açıp kapat
-        levhaAnlami.style.visibility = anlamGorunuyor ? "visible" : "hidden";
-
-        // Göz ikonunun durumunu güncelle
-        gözButonu.className = anlamGorunuyor ? "eye-icon visible" : "eye-icon hidden";
-    }
-
-    function oncekiLevha() {
-        if (mevcutLevhaIndex > 0) {
-            mevcutLevhaIndex--;
-            anlamGorunuyor = false; // Her geçişte anlam kapalı olmalı
-            guncelleLevha();
+            if (isCaptionVisible) {
+                caption.style.visibility = "hidden";
+                eyeIcon.classList.remove("fa-eye");
+                eyeIcon.classList.add("fa-eye-slash");
+                isCaptionVisible = false;
+            } else {
+                caption.style.visibility = "visible";
+                eyeIcon.classList.remove("fa-eye-slash");
+                eyeIcon.classList.add("fa-eye");
+                isCaptionVisible = true;
+            }
         }
-    }
 
-    function sonrakiLevha() {
-        if (mevcutLevhaIndex < levhalar.length - 1) {
-            mevcutLevhaIndex++;
-            anlamGorunuyor = false; // Her geçişte anlam kapalı olmalı
-            guncelleLevha();
+        function previousImage() {
+            currentIndex--;
+            if (currentIndex < 0) {
+                currentIndex = images.length - 1;
+            }
+            updateImageAndCaption();
         }
-    }
 
-    function anlamiGoster() {
-        anlamGorunuyor = !anlamGorunuyor;
-        guncelleLevha();
-    }
+        function nextImage() {
+            currentIndex++;
+            if (currentIndex >= images.length) {
+                currentIndex = 0;
+            }
+            updateImageAndCaption();
+        }
 
-    guncelleLevha();
-</script>
+        function updateImageAndCaption() {
+            document.getElementById("trafficSign").src = images[currentIndex].resim;
+            document.getElementById("caption").innerHTML = images[currentIndex].anlam;
+            document.getElementById("caption").style.visibility = "hidden";
+            document.getElementById("eyeIcon").classList.remove("fa-eye");
+            document.getElementById("eyeIcon").classList.add("fa-eye-slash");
+            isCaptionVisible = false;
+            updatePageNumber();
+        }
+
+        function updatePageNumber() {
+            document.getElementById("pageNumber").innerHTML = (currentIndex + 1) + " / " + images.length;
+        }
+    </script>
 
 </body>
 </html>
