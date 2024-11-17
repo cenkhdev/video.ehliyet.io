@@ -1,60 +1,199 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Video Yönlendirmeleri</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-        }
-        h1 {
-            color: #333;
-        }
-        .video-links {
-            list-style: none;
-            padding: 0;
-        }
-        .video-links li {
-            margin: 10px 0;
-        }
-        .video-links a {
-            text-decoration: none;
-            color: #0066cc;
-            font-size: 18px;
-            border: 1px solid #0066cc;
-            padding: 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        .video-links a:hover {
-            background-color: #0066cc;
-            color: white;
-        }
-    </style>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Ehliyet Sınav Soruları - konu anlatım videoları</title>
+   <style>
+       body {
+           font-family: Arial, sans-serif;
+           background-color: #f9fafb;
+           margin: 0;
+           padding: 20px;
+           color: #333;
+       }
+
+       .ytv1-container {
+           max-width: 1200px;
+           margin: 0 auto;
+           display: flex;
+           flex-wrap: wrap;
+           gap: 20px;
+       }
+
+       .ytv1-course {
+           flex: 1 1 100%;
+           margin-bottom: 20px;
+       }
+
+       .ytv1-course-header {
+           background-color: #0077cc;
+           color: white;
+           padding: 15px;
+           border-radius: 8px;
+           font-size: 24px;
+           font-weight: bold;
+           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+           margin-bottom: 10px;
+       }
+
+       .ytv1-lesson {
+           background-color: #ffffff;
+           border-radius: 12px;
+           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+           padding: 15px;
+           margin: 10px 0;
+           display: flex;
+           align-items: center;
+           position: relative;
+           padding-left: 50px;
+           transition: transform 0.2s;
+       }
+
+       .ytv1-lesson:hover {
+           transform: translateY(-3px);
+       }
+
+       .ytv1-lesson::before {
+           content: '';
+           background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/YouTube_icon_%282013-2017%29.png/800px-YouTube_icon_%282013-2017%29.png');
+           background-size: 24px 24px;
+           background-repeat: no-repeat;
+           width: 24px;
+           height: 24px;
+           position: absolute;
+           left: 15px;
+           top: 50%;
+           transform: translateY(-50%);
+       }
+
+       .ytv1-lesson a {
+           text-decoration: none;
+           color: #0077cc;
+           font-weight: 500;
+           font-size: 16px;
+           margin-left: 10px;
+           transition: color 0.3s;
+       }
+
+       .ytv1-lesson a:hover {
+           color: #005999;
+       }
+
+       @media (max-width: 600px) {
+           .ytv1-course {
+               flex: 1 1 100%;
+           }
+       }
+   </style>
 </head>
 <body>
-    <h1>YouTube Videolarına Gidin</h1>
-    <p>Videoları izlemek için aşağıdaki linklere tıklayın.</p>
-    <ul class="video-links">
-        <li>
-            <!-- Mobil cihazlar için deep link, bilgisayarlar için YouTube tarayıcı linki -->
-            <a href="vnd.youtube://0OC3aKjWzeY" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=0OC3aKjWzeY';">Video 1: Başlangıç Eğitimi</a>
-        </li>
-        <li>
-            <a href="vnd.youtube://abc123xyz" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=abc123xyz';">Video 2: İleri Düzey Konular</a>
-        </li>
-        <li>
-            <a href="vnd.youtube://xyz987abc" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=xyz987abc';">Video 3: Proje Yönetimi</a>
-        </li>
-    </ul>
+   Merhaba aşağıda önemli videoların linkleri yer alıyor tıklayarak izleyebilirsiniz. Sınava girmeden mutlaka izlemenizi tavsiye ederim.
 
-    <script>
-        // Mobil cihazlar için deep link geçerli, bilgisayarda tarayıcıya yönlendirme yapacak
-        // Eğer kullanıcı mobil bir cihazda ise, deep link kullanılır
-        // Eğer masaüstü bir cihazda ise, tarayıcıda YouTube video sayfasına yönlendirilir
-    </script>
+   <div class="ytv1-container">
+       <div class="ytv1-course">
+           <div class="ytv1-course-header">Trafik Dersleri</div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://BMtM0w9EbIg" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=BMtM0w9EbIg';">Kavşaklarda Geçiş Hakkı</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://yLS8k5aGaNM" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=yLS8k5aGaNM';">Polisin İşaretleri</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://_QPyMu2psIk" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=_QPyMu2psIk';">Trafik Levhaları</a>
+           </div>
+       </div>
+
+       <div class="ytv1-course">
+           <div class="ytv1-course-header">Motor Dersleri</div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://0OC3aKjWzeY" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=0OC3aKjWzeY';">Motor Nedir?</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://9Vv2Uy0Vu2A" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=9Vv2Uy0Vu2A';">Otomatik Vites</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://vOK6KHmm0CA" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=vOK6KHmm0CA';">Araç Kullanmaya Hazırlık</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://Z6BFiV0roAw" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=Z6BFiV0roAw';">Aydınlatma & İkaz Sistemi</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://44xT7mmDY2c" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=44xT7mmDY2c';">Fren Sistemi</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://S8-PhSfh-JY" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=S8-PhSfh-JY';">Lastikler</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://vyb2HRTaQHk" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=vyb2HRTaQHk';">Ön Düzen ve Direksiyon Sistemi</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://5P55Uy2sEDQ" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=5P55Uy2sEDQ';">Aktif ve Pasif Güvenlik Sistemleri</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://qVHR1EVpQEI" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=qVHR1EVpQEI';">Derhal Durulması Gereken Haller</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://fRAxO8wSM70" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=fRAxO8wSM70';">Soğutma Sistemi</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://iKA9aL824lo" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=iKA9aL824lo';">Ateşleme Sistemi</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://ixxbd2v0RPE" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=ixxbd2v0RPE';">Yağlama Sistemi</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://DSTowMMZ_uA" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=DSTowMMZ_uA';">Şarj Sistemi</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://fNHAYEY-Jfw" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://youtu.be/fNHAYEY-Jfw?si=NNziUSC7j9JVGONV';">Güç Aktarma Organları</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://h-OdwfNAwIw" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=h-OdwfNAwIw';">Süspansiyon Sistemi</a>
+           </div>
+       </div>
+
+       <div class="ytv1-course">
+           <div class="ytv1-course-header">İlkyardım Dersleri</div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://-ddy1PSrt5Y" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=-ddy1PSrt5Y';">İlk Yardım - Acil Tedavi</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://xSfmD0VxGls" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=xSfmD0VxGls';">İlkyardımın ABC'si</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://A-xYsK4OlDA" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=A-xYsK4OlDA';">Vücudu Oluşturan Sistemler</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://3A7cY4Uk0jc" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=3A7cY4Uk0jc';">Kanamalar</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://2khB7_ysTVY" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=2khB7_ysTVY';">Turnike</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://Rr3MuN3HxfA" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=Rr3MuN3HxfA';">Şok, Koma, Bayılma</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://FKv9vP3i5bk" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=FKv9vP3i5bk';">Yaralanmalar</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://ivpR9v4hq8I" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=ivpR9v4hq8I';">Yanıklar</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://KA3BHlQy6Y4" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=KA3BHlQy6Y4';">Kırık, Çıkık, Burkulma</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://hP4G4FILysY" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=hP4G4FILysY';">Taşıma Teknikleri</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://qXtjoifqJ0c" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=qXtjoifqJ0c';">Yaşam Bulguları</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="vnd.youtube://3BpUmV9TY5c" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=3BpUmV9TY5c';">Solunum Yolu Tıkanıkları</a>
+           </div>
+       </div>
+   </div>
+
+   <p><img src="https://video.ehliyet.io/og-image.jpg" alt="" width="110" height="69" /></p>
 </body>
 </html>
