@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Ehliyet Sınav Soruları - konu anlatım videoları</title>
+   <style>
+       body {
+           font-family: Arial, sans-serif;
+           background-color: #f9fafb;
+           margin: 0;
+           padding: 20px;
+           color: #333;
+       }
+
+       .ytv1-container {
+           max-width: 1200px;
+           margin: 0 auto;
+           display: flex;
+           flex-wrap: wrap;
+           gap: 20px;
+       }
+
+       .ytv1-course {
+           flex: 1 1 100%;
+           margin-bottom: 20px;
+       }
+
+       .ytv1-course-header {
+           background-color: #0077cc;
+           color: white;
+           padding: 15px;
+           border-radius: 8px;
+           font-size: 24px;
+           font-weight: bold;
+           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+           margin-bottom: 10px;
+       }
+
+       .ytv1-lesson {
+           background-color: #ffffff;
+           border-radius: 12px;
+           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+           padding: 15px;
+           margin: 10px 0;
+           display: flex;
+           align-items: center;
+           position: relative;
+           padding-left: 50px;
+           transition: transform 0.2s;
+       }
+
+       .ytv1-lesson:hover {
+           transform: translateY(-3px);
+       }
+
+       .ytv1-lesson::before {
+           content: '';
+           background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/YouTube_icon_%282013-2017%29.png/800px-YouTube_icon_%282013-2017%29.png');
+           background-size: 24px 24px;
+           background-repeat: no-repeat;
+           width: 24px;
+           height: 24px;
+           position: absolute;
+           left: 15px;
+           top: 50%;
+           transform: translateY(-50%);
+       }
+
+       .ytv1-lesson a {
+           text-decoration: none;
+           color: #0077cc;
+           font-weight: 500;
+           font-size: 16px;
+           margin-left: 10px;
+           transition: color 0.3s;
+       }
+
+       .ytv1-lesson a:hover {
+           color: #005999;
+       }
+
+       @media (max-width: 600px) {
+           .ytv1-course {
+               flex: 1 1 100%;
+           }
+       }
+   </style>
+</head>
+<body>
+   Merhaba aşağıda önemli videoların linkleri yer alıyor tıklayarak izleyebilirsiniz. Sınava girmeden mutlaka izlemenizi tavsiye ederim.
+
+   <div class="ytv1-container">
+       <div class="ytv1-course">
+           <div class="ytv1-course-header">Trafik Dersleri</div>
+           <div class="ytv1-lesson">
+               <a href="https://www.youtube.com/watch?v=BMtM0w9EbIg" class="yt-link">Kavşaklarda Geçiş Hakkı</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="https://www.youtube.com/watch?v=yLS8k5aGaNM" class="yt-link">Polisin İşaretleri</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="https://www.youtube.com/watch?v=_QPyMu2psIk" class="yt-link">Trafik Levhaları</a>
+           </div>
+       </div>
+
+       <div class="ytv1-course">
+           <div class="ytv1-course-header">Motor Dersleri</div>
+           <div class="ytv1-lesson">
+               <a href="https://www.youtube.com/watch?v=0OC3aKjWzeY" class="yt-link">Motor Nedir?</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="https://www.youtube.com/watch?v=9Vv2Uy0Vu2A" class="yt-link">Otomatik Vites</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="https://www.youtube.com/watch?v=vOK6KHmm0CA" class="yt-link">Araç Kullanmaya Hazırlık</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="https://www.youtube.com/watch?v=Z6BFiV0roAw" class="yt-link">Aydınlatma & İkaz Sistemi</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="https://www.youtube.com/watch?v=44xT7mmDY2c" class="yt-link">Fren Sistemi</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="https://www.youtube.com/watch?v=S8-PhSfh-JY" class="yt-link">Lastikler</a>
+           </div>
+       </div>
+
+       <div class="ytv1-course">
+           <div class="ytv1-course-header">İlkyardım Dersleri</div>
+           <div class="ytv1-lesson">
+               <a href="https://www.youtube.com/watch?v=-ddy1PSrt5Y" class="yt-link">İlk Yardım - Acil Tedavi</a>
+           </div>
+           <div class="ytv1-lesson">
+               <a href="https://www.youtube.com/watch?v=xSfmD0VxGls" class="yt-link">İlkyardımın ABC'si</a>
+           </div>
+       </div>
+   </div>
+
+   <p><img src="https://video.ehliyet.io/og-image.jpg" alt="" width="110" height="69" /></p>
+
+   <script>
+       // Bu fonksiyon linklerin yönlendirilmesini sağlar
+       document.querySelectorAll('.yt-link').forEach(link => {
+           link.addEventListener('click', function(event) {
+               event.preventDefault(); // Varsayılan linki takip etme
+
+               const url = link.getAttribute('href');
+               const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+
+               if (isMobile) {
+                   // Mobil cihazda YouTube uygulamasına yönlendirme
+                   const videoId = url.split('v=')[1];  // YouTube video ID'sini çıkarıyoruz
+                   window.location.href = `vnd.youtube://${videoId}`;  // Mobil cihazlar için deep link
+               } else {
+                   // Masaüstü cihazda YouTube web sitesine yönlendirme
+                   window.location.href = url;
+               }
+           });
+       });
+   </script>
+</body>
+</html>
