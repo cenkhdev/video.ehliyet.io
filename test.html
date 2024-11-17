@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Yönlendirmeleri</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        .video-links {
+            list-style: none;
+            padding: 0;
+        }
+        .video-links li {
+            margin: 10px 0;
+        }
+        .video-links a {
+            text-decoration: none;
+            color: #0066cc;
+            font-size: 18px;
+            border: 1px solid #0066cc;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .video-links a:hover {
+            background-color: #0066cc;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>YouTube Videolarına Gidin</h1>
+    <p>Videoları izlemek için aşağıdaki linklere tıklayın.</p>
+    <ul class="video-links">
+        <li>
+            <!-- Mobil cihazlar için deep link, bilgisayarlar için YouTube tarayıcı linki -->
+            <a href="vnd.youtube://0OC3aKjWzeY" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=0OC3aKjWzeY';">Video 1: Başlangıç Eğitimi</a>
+        </li>
+        <li>
+            <a href="vnd.youtube://abc123xyz" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=abc123xyz';">Video 2: İleri Düzey Konular</a>
+        </li>
+        <li>
+            <a href="vnd.youtube://xyz987abc" onclick="if (!/Mobi/.test(navigator.userAgent)) window.location='https://www.youtube.com/watch?v=xyz987abc';">Video 3: Proje Yönetimi</a>
+        </li>
+    </ul>
+
+    <script>
+        // Mobil cihazlar için deep link geçerli, bilgisayarda tarayıcıya yönlendirme yapacak
+        // Eğer kullanıcı mobil bir cihazda ise, deep link kullanılır
+        // Eğer masaüstü bir cihazda ise, tarayıcıda YouTube video sayfasına yönlendirilir
+    </script>
+</body>
+</html>
