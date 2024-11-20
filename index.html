@@ -9,11 +9,11 @@
             font-family: Arial, sans-serif;
             background-color: #f9fafb;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             color: #333;
         }
 
-        /* Yeni eklenen kutu için stil */
+        /* Sabit üst kutu için stil */
         .download-box {
             background-color: #0077cc;  /* Kutu rengi */
             color: white;  /* Yazı rengi */
@@ -28,6 +28,7 @@
             left: 0;
             width: 100%;
             z-index: 1000;  /* Üstte görünmesini sağlamak */
+            box-sizing: border-box;  /* Kutu boyutlarını doğru hesapla */
         }
 
         /* Kutu içindeki link stilini ayarlama */
@@ -42,15 +43,15 @@
             color: #d9e7f4;
         }
 
+        /* İçeriğin kutu ile çakışmaması için margin ayarlama */
         .ytv1-container {
             max-width: 1200px;
-            margin: 80px auto 20px; /* Üst kısımda kutudan dolayı boşluk bırakmak */
+            margin: 80px auto 20px; /* Sabit kutu yüzünden üstte boşluk bırakmak */
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
         }
 
-        /* Diğer stil kodlarınız burada devam ediyor... */
         .ytv1-course {
             flex: 1 1 100%;
             margin-bottom: 20px;
@@ -121,7 +122,7 @@
 
     <!-- Üstte sabit kutu -->
     <div class="download-box">
-        <span>Uygulamayı indirmek için tıklayın: <a href="https://indir.ehliyetsorulari.net/index1.html" target="_blank">İndirme Linki</a></span>
+        <span>Uygulamayı indirmek için tıklayın: <a href="https://www.example.com/indirme-linki" target="_blank">İndirme Linki</a></span>
     </div>
 
     <!-- İçerik kısmı -->
@@ -133,10 +134,69 @@
             <div class="ytv1-lesson">
                 <a href="https://www.youtube.com/watch?v=BMtM0w9EbIg" target="_self">Kavşaklarda Geçiş Hakkı</a>
             </div>
-            <!-- Diğer dersler burada devam ediyor -->
+            <div class="ytv1-lesson">
+                <a href="https://www.youtube.com/watch?v=yLS8k5aGaNM" target="_self">Polisin İşaretleri</a>
+            </div>
+            <div class="ytv1-lesson">
+                <a href="https://www.youtube.com/watch?v=_QPyMu2psIk" target="_self">Trafik Levhaları</a>
+            </div>
         </div>
 
-        <!-- Diğer kurslar burada devam ediyor... -->
+        <div class="ytv1-course">
+            <div class="ytv1-course-header">Motor Dersleri</div>
+            <div class="ytv1-lesson">
+                <a href="https://www.youtube.com/watch?v=0OC3aKjWzeY" target="_self">Motor Nedir?</a>
+            </div>
+            <div class="ytv1-lesson">
+                <a href="https://www.youtube.com/watch?v=9Vv2Uy0Vu2A" target="_self">Otomatik Vites</a>
+            </div>
+            <div class="ytv1-lesson">
+                <a href="https://www.youtube.com/watch?v=vOK6KHmm0CA" target="_self">Araç Kullanmaya Hazırlık</a>
+            </div>
+            <div class="ytv1-lesson">
+                <a href="https://www.youtube.com/watch?v=Z6BFiV0roAw" target="_self">Aydınlatma & İkaz Sistemi</a>
+            </div>
+            <div class="ytv1-lesson">
+                <a href="https://www.youtube.com/watch?v=44xT7mmDY2c" target="_self">Fren Sistemi</a>
+            </div>
+            <div class="ytv1-lesson">
+                <a href="https://www.youtube.com/watch?v=S8-PhSfh-JY" target="_self">Lastikler</a>
+            </div>
+            <div class="ytv1-lesson">
+                <a href="https://www.youtube.com/watch?v=vyb2HRTaQHk" target="_self">Ön Düzen ve Direksiyon Sistemi</a>
+            </div>
+            <div class="ytv1-lesson">
+                <a href="https://www.youtube.com/watch?v=5P55Uy2sEDQ" target="_self">Aktif ve Pasif Güvenlik Sistemleri</a>
+            </div>
+            <div class="ytv1-lesson">
+                <a href="https://www.youtube.com/watch?v=qVHR1EVpQEI" target="_self">Derhal Durulması Gereken Haller</a>
+            </div>
+            <div class="ytv1-lesson">
+                <a href="https://www.youtube.com/watch?v=fRAxO8wSM70" target="_self">Soğutma Sistemi</a>
+            </div>
+            <div class="ytv1-lesson">
+                <a href="https://www.youtube.com/watch?v=iKA9aL824lo" target="_self">Ateşleme Sistemi</a>
+            </div>
+            <div class="ytv1-lesson">
+                <a href="https://www.youtube.com/watch?v=ixxbd2v0RPE" target="_self">Yağlama Sistemi</a>
+            </div>
+            <div class="ytv1-lesson">
+                <a href="https://www.youtube.com/watch?v=DSTowMMZ_uA" target="_self">Şarj Sistemi</a>
+            </div>
+            <div class="ytv1-lesson">
+                <a href="https://youtu.be/fNHAYEY-Jfw?si=NNziUSC7j9JVGONV" target="_self">Güç Aktarma Organları</a>
+            </div>
+            <div class="ytv1-lesson">
+                <a href="https://www.youtube.com/watch?v=eNvi8cEYjro" target="_self">Süspansiyon Sistemi</a>
+            </div>
+        </div>
+
+        <div class="ytv1-course">
+            <div class="ytv1-course-header">Araç Teknik Bilgisi</div>
+            <div class="ytv1-lesson">
+                <a href="https://www.youtube.com/watch?v=q6nMkEGpmuI" target="_self">Araç Teknik Bilgisi</a>
+            </div>
+        </div>
     </div>
 
     <p><img src="https://video.ehliyet.io/og-image.jpg" alt="" width="110" height="69" /></p>
