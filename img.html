@@ -5,36 +5,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Resim Yükleme ve Görüntüleme</title>
   <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --border-color: #cccccc;
+    }
+    [data-theme="dark"] {
+      --bg-color: #121212;
+      --text-color: #ffffff;
+      --border-color: #444444;
+    }
     body {
       font-family: Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
       text-align: center;
       margin: 20px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .theme-toggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
     }
     .image-preview {
       display: flex;
       flex-direction: column; /* Resimleri alt alta sıralar */
-      gap: 10px;
+      gap: 5px; /* Resimler arası boşluk azaltıldı */
       margin-top: 20px;
       align-items: center;
     }
     .image-preview img {
       max-width: 90%; /* Ekran genişliğinin %90'ına kadar genişlesin */
       height: auto; /* Oranları korusun */
-      border: 2px solid #ccc;
+      border: 2px solid var(--border-color);
       border-radius: 8px;
       object-fit: contain;
+      transition: border-color 0.3s;
     }
   </style>
 </head>
 <body>
-  <h1>Resim Yükleme ve Önizleme v2</h1>
+  <h1>Resim Yükleme ve Önizleme</h1>
   <input type="file" id="fileInput" multiple accept="image/*">
   <div class="image-preview" id="imagePreview"></div>
+  <img src="https://cdn-icons-png.flaticon.com/512/1827/1827951.png" 
+       alt="Tema Değiştir" 
+       class="theme-toggle" 
+       id="themeToggle" 
+       title="Tema Değiştir">
 
   <script>
     const fileInput = document.getElementById('fileInput');
     const imagePreview = document.getElementById('imagePreview');
+    const themeToggle = document.getElementById('themeToggle');
 
+    // Resim önizleme fonksiyonu
     fileInput.addEventListener('change', function(event) {
       const files = event.target.files;
       imagePreview.innerHTML = ''; // Önceki resimleri temizle
@@ -47,6 +76,18 @@
         };
         reader.readAsDataURL(file);
       });
+    });
+
+    // Gece/Gündüz modu değiştirme fonksiyonu
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.body.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.body.setAttribute('data-theme', newTheme);
+
+      // İkon değişimi
+      themeToggle.src = newTheme === 'dark' 
+        ? 'https://cdn-icons-png.flaticon.com/512/740/740878.png' // Ay ikonu
+        : 'https://cdn-icons-png.flaticon.com/512/1827/1827951.png'; // Güneş ikonu
     });
   </script>
 </body>
