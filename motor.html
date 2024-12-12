@@ -22,6 +22,17 @@
         }
         .category {
             margin-bottom: 30px;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .category:nth-child(1) {
+            background-color: #ffcccc; /* İlk Yardım Dersleri */
+        }
+        .category:nth-child(2) {
+            background-color: #cce5ff; /* Trafik Dersleri */
+        }
+        .category:nth-child(3) {
+            background-color: #d4edda; /* Motor Dersleri */
         }
         .category-title {
             font-size: 20px;
@@ -163,14 +174,4 @@
                 }, 500); // YouTube uygulamasının açılmasını bekle, sonra tarayıcıya yönlendir
             } else {
                 // Masaüstü veya tarayıcıda açma
-                window.open(youtubeUrl, '_blank');
-            }
-        }
-
-        // Sayfa yüklendiğinde videoları yükle
-        window.onload = loadVideos;
-    </script>
-
-</body>
-</html>
-  
+                window
