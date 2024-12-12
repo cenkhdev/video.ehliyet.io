@@ -83,6 +83,22 @@
             color: #333;
         }
 
+        .share-btn {
+            margin-top: 15px;
+            padding: 12px 20px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .share-btn:hover {
+            background-color: #45a049;
+        }
+
         .playlist-container {
             padding: 20px;
             max-width: 1200px;
@@ -201,6 +217,7 @@
     <!-- Info Box -->
     <div class="info-box">
         <p>Merhaba, aşağıda önemli videoların linkleri yer alıyor. Tıklayarak izleyebilirsiniz. Sınava girmeden mutlaka izlemenizi tavsiye ederim.</p>
+        <button class="share-btn" onclick="shareLink()">Paylaş</button>
     </div>
 
     <div class="playlist-container" id="playlist-container">
@@ -245,75 +262,68 @@
                     { title: 'Ders 1: Motor Nedir?', videoId: '0OC3aKjWzeY' },
                     { title: 'Ders 2: Otomatik Vites', videoId: '9Vv2Uy0Vu2A' },
                     { title: 'Ders 3: Araç Kullanmaya Hazırlık', videoId: 'vOK6KHmm0CA' },
-                    { title: 'Ders 4: Aydınlatma & İkaz Sistemi', videoId: 'Z6BFiV0roAw' },
-                    { title: 'Ders 5: Fren Sistemi', videoId: '44xT7mmDY2c' },
-                    { title: 'Ders 6: Lastikler', videoId: 'S8-PhSfh-JY' },
-                    { title: 'Ders 7: Ön Düzen ve Direksiyon Sistemi', videoId: 'vyb2HRTaQHk' },
-                    { title: 'Ders 8: Aktif ve Pasif Güvenlik Sistemleri', videoId: '5P55Uy2sEDQ' },
-                    { title: 'Ders 9: Derhal Durulması Gereken Haller', videoId: 'qVHR1EVpQEI' },
-                    { title: 'Ders 10: Soğutma Sistemi', videoId: 'fRAxO8wSM70' },
-                    { title: 'Ders 11: Ateşleme Sistemi', videoId: 'iKA9aL824lo' },
-                    { title: 'Ders 12: Yağlama Sistemi', videoId: 'ixxbd2v0RPE' },
-                    { title: 'Ders 13: Şarj Sistemi', videoId: 'DSTowMMZ_uA' },
-                    { title: 'Ders 14: Güç aktarma organları', videoId: 'ajkHfiY_TLM' },
-                    { title: 'Ders 15: Süspansiyon Sistemi', videoId: 'h-OdwfNAwIw' }
+                    { title: 'Ders 4: Aydınlatma & İkaz Sistemi', videoId: 'Z6BFiV2S9e8' },
+                    { title: 'Ders 5: Motor Gücü & Tork', videoId: 'DmcBcuMl6o4' }
                 ]
             }
         ];
 
-        // Videoları kategorilere göre listele
-        function loadVideos() {
-            const playlistContainer = document.getElementById('playlist-container');
-            categories.forEach(category => {
-                const categoryDiv = document.createElement('div');
-                categoryDiv.classList.add('category', category.className);
+        // Video listeleri
+        categories.forEach(category => {
+            const categoryContainer = document.createElement('div');
+            categoryContainer.classList.add('category', category.className);
 
-                const categoryTitle = document.createElement('div');
-                categoryTitle.classList.add('category-title');
-                categoryTitle.textContent = category.title;
-                categoryDiv.appendChild(categoryTitle);
+            const categoryTitle = document.createElement('h3');
+            categoryTitle.classList.add('category-title');
+            categoryTitle.textContent = category.title;
+            categoryContainer.appendChild(categoryTitle);
 
-                category.videos.forEach(video => {
-                    const videoDiv = document.createElement('div');
-                    videoDiv.classList.add('video-item');
-                    videoDiv.onclick = () => {
-                        openInYouTubeApp(video.videoId);
-                    };
+            category.videos.forEach(video => {
+                const videoItem = document.createElement('div');
+                videoItem.classList.add('video-item');
+                videoItem.onclick = function () {
+                    window.location.href = `https://www.youtube.com/watch?v=${video.videoId}`;
+                };
 
-                    // Video öğesinin içeriğini oluştur
-                    videoDiv.innerHTML = `
-                        <img src="https://img.youtube.com/vi/${video.videoId}/mqdefault.jpg" class="video-thumbnail" alt="Video Thumbnail">
-                        <div class="video-title">${video.title}</div>
-                    `;
-                    categoryDiv.appendChild(videoDiv);
-                });
+                const videoThumbnail = document.createElement('img');
+                videoThumbnail.classList.add('video-thumbnail');
+                videoThumbnail.src = `https://img.youtube.com/vi/${video.videoId}/0.jpg`; // Youtube thumbnail
+                videoItem.appendChild(videoThumbnail);
 
-                playlistContainer.appendChild(categoryDiv);
+                const videoTitle = document.createElement('div');
+                videoTitle.classList.add('video-title');
+                videoTitle.textContent = video.title;
+                videoItem.appendChild(videoTitle);
+
+                categoryContainer.appendChild(videoItem);
             });
-        }
 
-        // Mobilde YouTube uygulamasında açma fonksiyonu
-        function openInYouTubeApp(videoId) {
-            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-            const youtubeUrl = `https://www.youtube.com/watch?v=${videoId}`;
+            document.getElementById('playlist-container').appendChild(categoryContainer);
+        });
 
-            if (isMobile) {
-                // Mobilde YouTube uygulamasında açma
-                const appUrl = `vnd.youtube://${videoId}`;
-                window.location.href = appUrl;
+        // Paylaş fonksiyonu
+        function shareLink() {
+            const url = "https://video.ehliyet.io/";
 
-                // Eğer YouTube uygulaması açılmazsa, tarayıcıda açma
-                setTimeout(() => {
-                    window.location.href = youtubeUrl;
-                }, 500); // YouTube uygulamasının açılmasını bekle, sonra tarayıcıya yönlendir
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Ehliyet Sınavı Konu Anlatım Videoları',
+                    url: url
+                }).then(() => {
+                    console.log('Paylaşım başarılı');
+                }).catch((error) => {
+                    console.log('Paylaşım hatası:', error);
+                });
             } else {
-                // Masaüstü veya tarayıcıda açma
-                window.open(youtubeUrl, '_blank');
+                const textArea = document.createElement('textarea');
+                textArea.value = url;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('Bağlantı panoya kopyalandı! Şimdi sosyal medya üzerinden paylaşabilirsiniz.');
             }
         }
-
-        // Sayfa yüklendiğinde videoları yükle
-        window.onload = loadVideos;
     </script>
 
 </body>
