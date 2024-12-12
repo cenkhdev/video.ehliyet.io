@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ehliyet Sınavı Konu Anlatımları</title>
+    <title>YouTube Oynatma Listesi</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -20,22 +20,27 @@
         }
 
         .download-box {
-            background-color: #FF9A8B;
-            border: 2px solid #FF6B6B;
+            background-color: #4A90E2; /* Yeni arka plan rengi */
+            border: 2px solid #357ABD; /* Yeni kenar rengi */
             border-radius: 8px;
             padding: 20px;
             margin: 20px 0;
             text-align: center;
+            width: calc(100% - 40px); /* Kategori box'ları ile aynı genişlikte */
+            max-width: 1200px; /* Maksimum genişlik */
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .download-box h2 {
             font-size: 24px;
             margin-bottom: 10px;
+            color: white; /* Başlık rengi */
         }
 
         .download-box a {
             display: inline-block;
-            background-color: #4CAF50;
+            background-color: #FF6F61; /* Buton rengi */
             color: white;
             padding: 12px 20px;
             text-decoration: none;
@@ -45,7 +50,7 @@
         }
 
         .download-box a:hover {
-            background-color: #45a049;
+            background-color: #FF5A47; /* Buton hover rengi */
         }
 
         .playlist-container {
@@ -135,6 +140,10 @@
             .video-title {
                 font-size: 14px;
             }
+
+            .download-box {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -147,7 +156,7 @@
     <!-- Uygulama indirme kutucuğu -->
     <div class="download-box">
         <h2>Uygulamamızı İndirin</h2>
-        <a href="https://indir.ehliyetsorulari.net/index1.html" target="_blank">Uygulamayı İndir</a>
+        <a href="https://indir.ehliyetsorulari.net/index1.html" target="_blank">İndirmek İçin Tıklayın</a>
     </div>
 
     <div class="playlist-container" id="playlist-container">
@@ -239,7 +248,7 @@
             });
         }
 
-        // Mobilde YouTube uygulamasında açma fonksiyonu (sadece uygulama)
+        // Mobilde YouTube uygulamasında açma fonksiyonu
         function openInYouTubeApp(videoId) {
             const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
             const youtubeUrl = `https://www.youtube.com/watch?v=${videoId}`;
@@ -249,7 +258,13 @@
                 const appUrl = `vnd.youtube://${videoId}`;
                 window.location.href = appUrl;
 
-                // Tarayıcıya yönlendirme yapılmaz
+                // Eğer YouTube uygulaması açılmazsa, tarayıcıda açma
+                setTimeout(() => {
+                    window.location.href = youtubeUrl;
+                }, 500); // YouTube uygulamasının açılmasını bekle, sonra tarayıcıya yönlendir
+            } else {
+                // Masaüstü veya tarayıcıda açma
+                window.open(youtubeUrl, '_blank');
             }
         }
 
