@@ -110,4 +110,66 @@
                     { title: 'Ders 11: Ateşleme Sistemi', videoId: 'iKA9aL824lo' },
                     { title: 'Ders 12: Yağlama Sistemi', videoId: 'ixxbd2v0RPE' },
                     { title: 'Ders 13: Şarj Sistemi', videoId: 'DSTowMMZ_uA' },
-                    { title: 'Ders 14: Güç aktarma organları',
+                    { title: 'Ders 14: Güç aktarma organları', videoId: 'ajkHfiY_TLM' },
+                    { title: 'Ders 15: Süspansiyon Sistemi', videoId: 'h-OdwfNAwIw' }
+                ]
+            }
+        ];
+
+        // Videoları kategorilere göre listele
+        function loadVideos() {
+            const playlistContainer = document.getElementById('playlist-container');
+            categories.forEach(category => {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.classList.add('category');
+
+                const categoryTitle = document.createElement('div');
+                categoryTitle.classList.add('category-title');
+                categoryTitle.textContent = category.title;
+                categoryDiv.appendChild(categoryTitle);
+
+                category.videos.forEach(video => {
+                    const videoDiv = document.createElement('div');
+                    videoDiv.classList.add('video-item');
+                    videoDiv.onclick = () => {
+                        openInYouTubeApp(video.videoId);
+                    };
+
+                    // Video öğesinin içeriğini oluştur
+                    videoDiv.innerHTML = `
+                        <img src="https://img.youtube.com/vi/${video.videoId}/mqdefault.jpg" class="video-thumbnail" alt="Video Thumbnail">
+                        <div class="video-title">${video.title}</div>
+                    `;
+                    categoryDiv.appendChild(videoDiv);
+                });
+
+                playlistContainer.appendChild(categoryDiv);
+            });
+        }
+
+        // Mobilde YouTube uygulamasında açma fonksiyonu
+        function openInYouTubeApp(videoId) {
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            const youtubeUrl = `https://www.youtube.com/watch?v=${videoId}`;
+
+            if (isMobile) {
+                // Mobilde YouTube uygulamasında açma
+                const appUrl = `vnd.youtube://${videoId}`;
+                window.location.href = appUrl;
+
+                // Eğer YouTube uygulaması açılmazsa, tarayıcıda açma
+                setTimeout(() => {
+                    window.location.href = youtubeUrl;
+                }, 500); // YouTube uygulamasının açılmasını bekle, sonra tarayıcıya yönlendir
+            } else {
+                // Masaüstü veya tarayıcıda açma
+                window.open(youtubeUrl, '_blank');
+            }
+        }
+
+        // Sayfa yüklendiğinde videoları yükle
+        window.onload = loadVideos;
+    </script>
+
+</body>
+</html>
