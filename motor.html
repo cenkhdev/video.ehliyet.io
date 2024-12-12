@@ -30,18 +30,29 @@
             font-weight: bold;
             margin-bottom: 10px;
         }
-        .category.ilkyardim {
-            background-color: #ffe5e5;
-            border: 2px solid #ff4d4d;
-        }
-        .category.trafik {
-            background-color: #e5f3ff;
-            border: 2px solid #4dafff;
-        }
-        .category.motor {
-            background-color: #e5ffe5;
-            border: 2px solid #4dff4d;
-        }
+       /* Kategorilerin arka plan renkleri */
+.category.ilkyardim {
+    background-color: #FF9A8B; /* Pastel kırmızımsı ton */
+    border: 2px solid #FF6B6B; /* Daha koyu kırmızı */
+}
+
+.category.trafik {
+    background-color: #6A9BFF; /* Canlı mavi ton */
+    border: 2px solid #4A8BFF; /* Daha koyu mavi */
+}
+
+.category.motor {
+    background-color: #7CFC00; /* Canlı yeşil */
+    border: 2px solid #3E8B3A; /* Daha koyu yeşil */
+}
+
+/* Hover (fareyle üzerine gelindiğinde) efektleri */
+.category:hover {
+    opacity: 0.9; /* Yumuşak opaklık efekti */
+    transform: scale(1.02); /* Hafif büyütme efekti */
+    transition: transform 0.3s, opacity 0.3s ease-in-out; /* Efektin yumuşak geçişi */
+}
+
         .video-item {
             background-color: white;
             border: 1px solid #ddd;
