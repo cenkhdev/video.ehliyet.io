@@ -20,6 +20,14 @@
         .playlist-container {
             padding: 20px;
         }
+        .category {
+            margin-bottom: 30px;
+        }
+        .category-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
         .video-item {
             background-color: white;
             border: 1px solid #ddd;
@@ -54,45 +62,68 @@
     </header>
 
     <div class="playlist-container" id="playlist-container">
-        <!-- Videolar buraya yüklenecek -->
+        <!-- Videolar kategorilere göre yüklenecek -->
     </div>
 
     <script>
-        // Oynatma listesindeki video ID'leri ve başlıkları
-        const videos = [
-            { title: 'Ders 1: Motor Nedir?', videoId: '0OC3aKjWzeY' },
-            { title: 'Ders 2: Otomatik Vites', videoId: '9Vv2Uy0Vu2A' },
-            { title: 'Ders 3: Araç Kullanmaya Hazırlık', videoId: 'vOK6KHmm0CA' },
-            { title: 'Ders 4: Aydınlatma & İkaz Sistemi', videoId: 'Z6BFiV0roAw' },
-            { title: 'Ders 5: Fren Sistemi', videoId: '44xT7mmDY2c' },
-            { title: 'Ders 6: Lastikler', videoId: 'S8-PhSfh-JY' },
-            { title: 'Ders 7: Ön Düzen ve Direksiyon Sistemi', videoId: 'vyb2HRTaQHk' },
-            { title: 'Ders 8: Aktif ve Pasif Güvenlik Sistemleri', videoId: '5P55Uy2sEDQ' },
-            { title: 'Ders 9: Derhal Durulması Gereken Haller', videoId: 'qVHR1EVpQEI' },
-            { title: 'Ders 10: Soğutma Sistemi', videoId: 'fRAxO8wSM70' },
-            { title: 'Ders 11: Ateşleme Sistemi', videoId: 'iKA9aL824lo' },
-            { title: 'Ders 12: Yağlama Sistemi', videoId: 'ixxbd2v0RPE' },
-            { title: 'Ders 13: Şarj Sistemi', videoId: 'DSTowMMZ_uA' },
-            { title: 'Ders 14: Güç aktarma organları', videoId: 'ajkHfiY_TLM' },
-            { title: 'Ders 15: Süspansiyon Sistemi', videoId: 'h-OdwfNAwIw' }
+        // Kategoriler ve videolar
+        const categories = [
+            {
+                title: 'İlkyardım Dersleri',
+                videos: [
+                    { title: 'İlk Yardım - Acil Tedavi', videoId: '-ddy1PSrt5Y' },
+                    { title: 'İlkyardımın ABC\'si', videoId: 'xSfmD0VxGls' },
+                    { title: 'Vücudu Oluşturan Sistemler', videoId: 'A-xYsK4OlDA' },
+                    { title: 'Kanamalar', videoId: '3A7cY4Uk0jc' },
+                    { title: 'Turnike', videoId: '2khB7_ysTVY' },
+                    { title: 'Şok, Koma, Bayılma', videoId: 'Rr3MuN3HxfA' },
+                    { title: 'Yaralanmalar', videoId: 'FKv9vP3i5bk' },
+                    { title: 'Yanıklar', videoId: 'ivpR9v4hq8I' },
+                    { title: 'Kırık, Çıkık, Burkulma', videoId: 'KA3BHlQy6Y4' },
+                    { title: 'Taşıma Teknikleri', videoId: 'hP4G4FILysY' },
+                    { title: 'Yaşam Bulguları', videoId: 'qXtjoifqJ0c' },
+                    { title: 'Solunum Yolu Tıkanıkları', videoId: '3BpUmV9TY5c' }
+                ]
+            },
+            {
+                title: 'Trafik Dersleri',
+                videos: [
+                    { title: 'Genel Tanımlar', videoId: 'v9laAaksM5Q' },
+                    { title: 'Kavşaklarda Geçiş Hakkı', videoId: 'BMtM0w9EbIg' },
+                    { title: 'Polisin İşaretleri', videoId: 'yLS8k5aGaNM' },
+                    { title: 'Trafik Levhaları', videoId: '_QPyMu2psIk' }
+                ]
+            }
         ];
 
-        // Videoları listele
+        // Videoları kategorilere göre listele
         function loadVideos() {
             const playlistContainer = document.getElementById('playlist-container');
-            videos.forEach(video => {
-                const videoDiv = document.createElement('div');
-                videoDiv.classList.add('video-item');
-                videoDiv.onclick = () => {
-                    openInYouTubeApp(video.videoId);
-                };
+            categories.forEach(category => {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.classList.add('category');
 
-                // Video öğesinin içeriğini oluştur
-                videoDiv.innerHTML = `
-                    <img src="https://img.youtube.com/vi/${video.videoId}/mqdefault.jpg" class="video-thumbnail" alt="Video Thumbnail">
-                    <div class="video-title">${video.title}</div>
-                `;
-                playlistContainer.appendChild(videoDiv);
+                const categoryTitle = document.createElement('div');
+                categoryTitle.classList.add('category-title');
+                categoryTitle.textContent = category.title;
+                categoryDiv.appendChild(categoryTitle);
+
+                category.videos.forEach(video => {
+                    const videoDiv = document.createElement('div');
+                    videoDiv.classList.add('video-item');
+                    videoDiv.onclick = () => {
+                        openInYouTubeApp(video.videoId);
+                    };
+
+                    // Video öğesinin içeriğini oluştur
+                    videoDiv.innerHTML = `
+                        <img src="https://img.youtube.com/vi/${video.videoId}/mqdefault.jpg" class="video-thumbnail" alt="Video Thumbnail">
+                        <div class="video-title">${video.title}</div>
+                    `;
+                    categoryDiv.appendChild(videoDiv);
+                });
+
+                playlistContainer.appendChild(categoryDiv);
             });
         }
 
