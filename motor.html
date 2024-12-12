@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Önemli Vşideolar</title>
+    <title>Ehliyet Sınavı Konu Anlatımları</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -17,6 +17,35 @@
             color: white;
             padding: 10px 0;
             text-align: center;
+        }
+
+        .download-box {
+            background-color: #FF9A8B;
+            border: 2px solid #FF6B6B;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .download-box h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .download-box a {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .download-box a:hover {
+            background-color: #45a049;
         }
 
         .playlist-container {
@@ -66,7 +95,7 @@
             cursor: pointer;
             border-radius: 5px;
             transition: background-color 0.3s ease;
-            flex-wrap: wrap; /* Ekran küçülünce esnek düzen */
+            flex-wrap: wrap;
         }
 
         .video-item:hover {
@@ -84,7 +113,7 @@
         .video-title {
             font-size: 16px;
             font-weight: bold;
-            flex: 1; /* Başlık kısmı esnek olsun */
+            flex: 1;
             word-wrap: break-word;
         }
 
@@ -99,12 +128,12 @@
             }
 
             .video-item {
-                flex-direction: row; /* Küçük ekranlarda resim solda, başlık sağda */
+                flex-direction: row;
                 justify-content: flex-start;
             }
 
             .video-title {
-                font-size: 14px; /* Başlık fontunu küçült */
+                font-size: 14px;
             }
         }
     </style>
@@ -114,6 +143,12 @@
     <header>
         <h1>YouTube Oynatma Listesi</h1>
     </header>
+
+    <!-- Uygulama indirme kutucuğu -->
+    <div class="download-box">
+        <h2>Uygulamamızı İndirin</h2>
+        <a href="https://indir.ehliyetsorulari.net/index1.html" target="_blank">Uygulamayı İndir</a>
+    </div>
 
     <div class="playlist-container" id="playlist-container">
         <!-- Videolar kategorilere göre yüklenecek -->
