@@ -23,21 +23,24 @@
         .category {
             margin-bottom: 30px;
             padding: 15px;
-            border-radius: 5px;
-        }
-        .category:nth-child(1) {
-            background-color: #ffcccc; /* İlk Yardım Dersleri */
-        }
-        .category:nth-child(2) {
-            background-color: #cce5ff; /* Trafik Dersleri */
-        }
-        .category:nth-child(3) {
-            background-color: #d4edda; /* Motor Dersleri */
+            border-radius: 8px;
         }
         .category-title {
             font-size: 20px;
             font-weight: bold;
             margin-bottom: 10px;
+        }
+        .category.ilkyardim {
+            background-color: #ffe5e5;
+            border: 2px solid #ff4d4d;
+        }
+        .category.trafik {
+            background-color: #e5f3ff;
+            border: 2px solid #4dafff;
+        }
+        .category.motor {
+            background-color: #e5ffe5;
+            border: 2px solid #4dff4d;
         }
         .video-item {
             background-color: white;
@@ -81,6 +84,7 @@
         const categories = [
             {
                 title: 'İlkyardım Dersleri',
+                className: 'ilkyardim',
                 videos: [
                     { title: 'İlk Yardım - Acil Tedavi', videoId: '-ddy1PSrt5Y' },
                     { title: 'İlkyardımın ABC\'si', videoId: 'xSfmD0VxGls' },
@@ -98,6 +102,7 @@
             },
             {
                 title: 'Trafik Dersleri',
+                className: 'trafik',
                 videos: [
                     { title: 'Genel Tanımlar', videoId: 'v9laAaksM5Q' },
                     { title: 'Kavşaklarda Geçiş Hakkı', videoId: 'BMtM0w9EbIg' },
@@ -107,6 +112,7 @@
             },
             {
                 title: 'Motor Dersleri',
+                className: 'motor',
                 videos: [
                     { title: 'Ders 1: Motor Nedir?', videoId: '0OC3aKjWzeY' },
                     { title: 'Ders 2: Otomatik Vites', videoId: '9Vv2Uy0Vu2A' },
@@ -132,7 +138,7 @@
             const playlistContainer = document.getElementById('playlist-container');
             categories.forEach(category => {
                 const categoryDiv = document.createElement('div');
-                categoryDiv.classList.add('category');
+                categoryDiv.classList.add('category', category.className);
 
                 const categoryTitle = document.createElement('div');
                 categoryTitle.classList.add('category-title');
@@ -174,4 +180,10 @@
                 }, 500); // YouTube uygulamasının açılmasını bekle, sonra tarayıcıya yönlendir
             } else {
                 // Masaüstü veya tarayıcıda açma
-                window
+                window.open(youtubeUrl, '_blank');
+            }
+        }
+
+        // Sayfa yüklendiğinde videoları yükle
+        window.onload = loadVideos;
+    </
