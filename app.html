@@ -113,8 +113,10 @@
       color: #333;
       font-size: 18px;
       cursor: pointer;
-      position: relative;
-      margin-left: auto;
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 10px;
     }
 
     .menu-item.question:hover {
@@ -125,7 +127,7 @@
     .dropdown-menu {
       display: none;
       position: absolute;
-      top: 50px;
+      top: -70px; /* Menü yukarı kaydırıldı */
       right: 10px;
       background-color: #fff;
       border: 1px solid #ddd;
