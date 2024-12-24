@@ -24,8 +24,24 @@
       background-color: #fff;
     }
 
-    .header .icons span {
-      margin-left: 10px;
+    .header .icon-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background-color: #f4f4f4;
+      padding: 8px 12px;
+      border-radius: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .header .icon-box:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .header .icon-box span {
       font-size: 20px;
     }
 
@@ -82,12 +98,29 @@
     .menu-item p {
       font-size: 14px;
     }
+
+    .menu-item.double {
+      grid-column: span 2;
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+    }
+
+    .menu-item.double .content {
+      flex: 1;
+      text-align: center;
+    }
+
+    .menu-item.double img {
+      width: 40px;
+      height: 40px;
+    }
   </style>
 </head>
 <body>
   <header>
     <div class="header">
-      <div class="icons">
+      <div class="icon-box">
         <span>🔔</span>
         <span>👤</span>
       </div>
@@ -100,13 +133,15 @@
   </section>
 
   <section class="menu">
-    <a href="#" class="menu-item">
-      <img src="turkcell-logo.png" alt="Turkcell">
-      <p>Turkcell</p>
-    </a>
-    <a href="#" class="menu-item">
-      <img src="pasaj-logo.png" alt="Pasaj">
-      <p>Pasaj</p>
+    <a href="#" class="menu-item double">
+      <div class="content">
+        <img src="turkcell-logo.png" alt="Turkcell">
+        <p>Turkcell</p>
+      </div>
+      <div class="content">
+        <img src="pasaj-logo.png" alt="Pasaj">
+        <p>Pasaj</p>
+      </div>
     </a>
     <a href="#" class="menu-item">
       <img src="superonline-logo.png" alt="Superonline">
