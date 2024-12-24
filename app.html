@@ -99,6 +99,29 @@
       width: 40px;
       height: 40px;
     }
+
+    .menu-item.question {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #333;
+      color: #fff;
+      font-size: 24px;
+      font-weight: bold;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      margin: 0 auto;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .menu-item.question:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
   </style>
 </head>
 <body>
@@ -150,6 +173,9 @@
     <a href="#" class="menu-item">
       <img src="wiyo-logo.png" alt="Wiyo">
       <p>Wiyo</p>
+    </a>
+    <a href="#" class="menu-item question">
+      ?
     </a>
   </section>
 </body>
