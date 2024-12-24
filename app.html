@@ -50,6 +50,7 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 10px;
       padding: 20px;
+      position: relative;
     }
 
     .menu-item {
@@ -101,26 +102,49 @@
     }
 
     .menu-item.question {
+      width: 40px;
+      height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #333;
-      color: #fff;
-      font-size: 24px;
-      font-weight: bold;
+      border: 2px solid #333;
       border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      margin: 0 auto;
+      background-color: transparent;
+      color: #333;
+      font-size: 18px;
       cursor: pointer;
-      text-decoration: none;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      margin-left: auto;
     }
 
     .menu-item.question:hover {
-      transform: scale(1.1);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      background-color: #f0f0f0;
+    }
+
+    /* Menü için açılır kutu */
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 50px;
+      right: 10px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      z-index: 10;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 20px;
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+      transition: background-color 0.2s;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: #f4f4f4;
     }
   </style>
 </head>
@@ -174,9 +198,27 @@
       <img src="wiyo-logo.png" alt="Wiyo">
       <p>Wiyo</p>
     </a>
-    <a href="#" class="menu-item question">
-      ?
-    </a>
+    <div class="menu-item question" onclick="toggleMenu()">?</div>
+    <div class="dropdown-menu" id="dropdown">
+      <a href="#link1">Link 1</a>
+      <a href="#link2">Link 2</a>
+    </div>
   </section>
+
+  <script>
+    function toggleMenu() {
+      const dropdown = document.getElementById("dropdown");
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+
+    // Sayfa dışında bir yere tıklanınca menüyü kapatma
+    document.addEventListener("click", function (event) {
+      const dropdown = document.getElementById("dropdown");
+      const question = document.querySelector(".menu-item.question");
+      if (!dropdown.contains(event.target) && !question.contains(event.target)) {
+        dropdown.style.display = "none";
+      }
+    });
+  </script>
 </body>
 </html>
