@@ -27,6 +27,12 @@
     .header .icons span {
       margin-left: 10px;
       font-size: 20px;
+      cursor: pointer;
+    }
+
+    .header .icons a {
+      text-decoration: none;
+      color: inherit;
     }
 
     .banner {
@@ -83,21 +89,32 @@
       font-size: 14px;
     }
 
-    .menu-item.double {
-      grid-column: span 2;
+    .actions-row {
       display: flex;
       justify-content: space-between;
-      padding: 20px;
+      margin: 20px 20px 0 20px;
     }
 
-    .menu-item.double .content {
-      flex: 1;
+    .action-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #e9f1f7;
+      width: 22%;
+      padding: 15px;
+      border-radius: 10px;
       text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+      color: #00274d;
+      font-size: 14px;
     }
 
-    .menu-item.double img {
+    .action-item img {
       width: 40px;
       height: 40px;
+      margin-bottom: 5px;
     }
 
     .menu-item.question {
@@ -152,7 +169,7 @@
   <header>
     <div class="header">
       <div class="icons">
-        <span>🔔</span>
+        <a href="#"><span>🔔</span></a>
         <span>👤</span>
       </div>
     </div>
@@ -164,15 +181,13 @@
   </section>
 
   <section class="menu">
-    <a href="#" class="menu-item double">
-      <div class="content">
-        <img src="turkcell-logo.png" alt="Turkcell">
-        <p>Turkcell</p>
-      </div>
-      <div class="content">
-        <img src="pasaj-logo.png" alt="Pasaj">
-        <p>Pasaj</p>
-      </div>
+    <a href="#" class="menu-item">
+      <img src="turkcell-logo.png" alt="Turkcell">
+      <p>Turkcell</p>
+    </a>
+    <a href="#" class="menu-item">
+      <img src="pasaj-logo.png" alt="Pasaj">
+      <p>Pasaj</p>
     </a>
     <a href="#" class="menu-item">
       <img src="superonline-logo.png" alt="Superonline">
@@ -198,12 +213,32 @@
       <img src="wiyo-logo.png" alt="Wiyo">
       <p>Wiyo</p>
     </a>
-    <div class="menu-item question" onclick="toggleMenu()">?</div>
-    <div class="dropdown-menu" id="dropdown">
-      <a href="#link1">levhalar </a>
-      <a href="#link2">gizlilik politikası</a>
-    </div>
   </section>
+
+  <section class="actions-row">
+    <a href="#" class="action-item">
+      <img src="emirlerim.png" alt="Emirlerim">
+      <p>Emirlerim</p>
+    </a>
+    <a href="#" class="action-item">
+      <img src="talep-girisi.png" alt="Talep Girişi">
+      <p>Talep Girişi</p>
+    </a>
+    <a href="#" class="action-item">
+      <img src="para-transferi.png" alt="Para Transferi">
+      <p>Para Transferi</p>
+    </a>
+    <a href="#" class="action-item">
+      <img src="al-sat.png" alt="Al/Sat">
+      <p>Al/Sat</p>
+    </a>
+  </section>
+
+  <div class="menu-item question" onclick="toggleMenu()">?</div>
+  <div class="dropdown-menu" id="dropdown">
+    <a href="#link1">Link 1</a>
+    <a href="#link2">Link 2</a>
+  </div>
 
   <script>
     function toggleMenu() {
@@ -211,7 +246,6 @@
       dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
     }
 
-    // Sayfa dışında bir yere tıklanınca menüyü kapatma
     document.addEventListener("click", function (event) {
       const dropdown = document.getElementById("dropdown");
       const question = document.querySelector(".menu-item.question");
