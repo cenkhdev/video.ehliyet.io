@@ -86,6 +86,20 @@
 
     .menu-item.wide {
       grid-column: span 2;
+      height: 140px; /* Yüksekliği artırıldı */
+    }
+
+    .menu-item.wide span {
+      font-size: 18px; /* Font boyutu büyütüldü */
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .menu-item span {
+      word-wrap: break-word; /* Yazılar mobilde taşmasın */
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap; /* Mobil ekranlarda düzgün görünmesi için */
     }
 
     .actions-row {
@@ -180,12 +194,15 @@
   <section class="menu">
     <a href="#" class="menu-item wide">
       <img src="turkcell-pasaj-logo.png" alt="Turkcell ve Pasaj">
+      <span>Turkcell ve Pasaj</span>
     </a>
     <a href="#" class="menu-item">
       <img src="superonline-logo.png" alt="Superonline">
+      <span>Superonline</span>
     </a>
     <a href="#" class="menu-item">
       <img src="magazalar-logo.png" alt="Mağazalar">
+      <span>Mağazalar</span>
     </a>
   </section>
 
