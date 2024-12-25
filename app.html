@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ehliyet App</title>
- <style>
+  <style>
     * {
       margin: 0;
       padding: 0;
@@ -68,10 +68,10 @@
       border-radius: 10px;
       text-align: center;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s, box-shadow 0.2s;
       cursor: pointer;
       text-decoration: none;
       color: inherit;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .menu-item:hover {
@@ -86,26 +86,20 @@
 
     .menu-item.wide {
       grid-column: span 2;
-      height: 140px; /* Yüksekliği artırıldı */
+      height: 140px;
     }
 
     .menu-item.wide span {
-      font-size: 18px; /* Font boyutu büyütüldü */
+      font-size: 18px;
       font-weight: bold;
       margin-top: 10px;
-    }
-
-    .menu-item span {
-      word-wrap: break-word; /* Yazılar mobilde taşmasın */
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap; /* Mobil ekranlarda düzgün görünmesi için */
     }
 
     .actions-row {
       display: flex;
       justify-content: space-between;
-      margin: 20px 20px 0 20px;
+      padding: 20px;
+      gap: 10px;
     }
 
     .action-item {
@@ -121,6 +115,12 @@
       cursor: pointer;
       text-decoration: none;
       color: #00274d;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .action-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
 
     .action-item img {
@@ -129,8 +129,8 @@
     }
 
     .menu-item.question {
-      width: 20px;
-      height: 20px;
+      width: 40px;
+      height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -149,7 +149,6 @@
       background-color: #f0f0f0;
     }
 
-    /* Menü için açılır kutu */
     .dropdown-menu {
       display: none;
       position: fixed;
@@ -193,26 +192,25 @@
 
   <section class="menu">
     <a href="https://app.ehliyet.io/2024-2/" class="menu-item wide">
-      <img src="http://video.ehliyet.io/quiz-logo.png" alt="Tçıkmış esınavlar">
+      <img src="http://video.ehliyet.io/quiz-logo.png" alt="Çıkmış Sınavlar">
       <span>Çıkmış Sınav Soruları</span>
     </a>
     <a href="https://app.ehliyet.io/2044/" class="menu-item">
-      <img src="http://video.ehliyet.io/superonline-logo.png" alt="günün sınavı">
-      <span>Günün Sınavı <br> 
-(24 Aralık 2024)</span>
+      <img src="http://video.ehliyet.io/superonline-logo.png" alt="Günün Sınavı">
+      <span>Günün Sınavı<br><span id="today-date"></span></span>
     </a>
     <a href="https://app.ehliyet.io/2014/" class="menu-item">
-      <img src="http://video.ehliyet.io/rasgele.png" alt="rasgele">
+      <img src="http://video.ehliyet.io/rasgele.png" alt="Rastgele">
       <span>Rastgele Sınav</span>
     </a>
   </section>
 
   <section class="actions-row">
     <a href="https://app.ehliyet.io/ehliyet-sohbet/" class="action-item">
-      <img src="http://video.ehliyet.io/emirlerim.png" alt="sohbet">
+      <img src="http://video.ehliyet.io/emirlerim.png" alt="Sohbet">
     </a>
     <a href="https://app.ehliyet.io/levhalar/" class="action-item">
-      <img src="http://video.ehliyet.io/talep-girisi.png" alt="levhalar">
+      <img src="http://video.ehliyet.io/talep-girisi.png" alt="Levhalar">
     </a>
     <a href="#" class="action-item">
       <img src="http://video.ehliyet.io/para-transferi.png" alt="Para Transferi">
@@ -224,7 +222,7 @@
 
   <div class="menu-item question" onclick="toggleMenu()">?</div>
   <div class="dropdown-menu" id="dropdown">
-    <a href="#">hazırlanıyor</a>
+    <a href="#">Hazırlanıyor</a>
   </div>
 
   <script>
@@ -240,6 +238,19 @@
         dropdown.style.display = "none";
       }
     });
+
+    // Günün tarihini otomatik ayarlama
+    function setTodayDate() {
+      const today = new Date();
+      const formattedDate = today.toLocaleDateString("tr-TR", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+      document.getElementById("today-date").textContent = formattedDate;
+    }
+
+    setTodayDate();
   </script>
 </body>
 </html>
