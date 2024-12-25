@@ -3,13 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kutucuklar</title>
+    <title>Sayfa Düzeni</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .icons img {
+            width: 20px;
+            height: 20px;
+            margin-left: 15px;
+            cursor: pointer;
+        }
+
+        .main-banner {
+            background-color: #f5faff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .main-banner img {
+            width: 200px;
+            height: auto;
+        }
+
+        .main-banner p {
+            font-size: 18px;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .large-box {
+            background-color: #f0f8ff;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 20px;
+            color: #00274d;
+        }
+
+        .large-box img {
+            width: 100px;
+            height: auto;
+            margin-bottom: 10px;
         }
 
         .actions-row {
@@ -24,7 +78,7 @@
             align-items: center;
             justify-content: center;
             background-color: #e9f1f7;
-            width: 16%; /* Genişlik %25 küçültüldü */
+            width: 16%; /* Kutucuklar küçültüldü */
             padding: 10px; /* İç kenar boşlukları küçültüldü */
             border-radius: 10px;
             text-align: center;
@@ -42,9 +96,76 @@
         .action-item:hover {
             transform: scale(1.05); /* Hover efekti */
         }
+
+        .help-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: transparent;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .help-icon:hover {
+            background-color: #f0f0f0;
+        }
+
+        .menu {
+            display: none;
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            z-index: 10;
+        }
+
+        .menu a {
+            display: block;
+            padding: 5px 10px;
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .menu a:last-child {
+            border-bottom: none;
+        }
+
+        .menu a:hover {
+            background-color: #f9f9f9;
+        }
     </style>
 </head>
 <body>
+    <header>
+        <div class="icons">
+            <img src="notification-icon.png" alt="Bildirim" onclick="window.location.href='#';">
+            <img src="profile-icon.png" alt="Profil">
+        </div>
+    </header>
+
+    <div class="main-banner">
+        <img src="iphone16.png" alt="iPhone 16">
+        <p>25.389 TL'den başlayan Değiş Tokus fırsatıyla satışta!</p>
+    </div>
+
+    <div class="large-box">
+        <img src="turkcell-pasaj.png" alt="Turkcell ve Pasaj">
+        <p>Turkcell & Pasaj</p>
+    </div>
+
     <section class="actions-row">
         <a href="#" class="action-item">
             <img src="emirlerim.png" alt="Emirlerim">
@@ -59,5 +180,21 @@
             <img src="al-sat.png" alt="Al/Sat">
         </a>
     </section>
+
+    <div class="help-icon" onclick="toggleMenu()">
+        <span>?</span>
+    </div>
+    <div class="menu" id="helpMenu">
+        <a href="#link1">#link1</a>
+        <a href="#link2">#link2</a>
+        <a href="#link3">#link3</a>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('helpMenu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
 </body>
 </html>
