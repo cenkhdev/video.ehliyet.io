@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram Reels Otomatik Birleştirici</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-card: #1a1a24;
+      --accent: #ff3366;
+      --accent-glow: rgba(255, 51, 102, 0.4);
+      --accent-secondary: #7c3aed;
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0b0;
+      --border: rgba(255, 255, 255, 0.08);
+      --success: #10b981;
+      --gradient: linear-gradient(135deg, #ff3366 0%, #7c3aed 50%, #3b82f6 100%);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+    }
+
+    .bg-pattern {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: 
+        radial-gradient(ellipse at 20% 20%, rgba(255, 51, 102, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(124, 58, 237, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px;
+      padding-bottom: 100px;
+    }
+
+    header {
+      text-align: center;
+      padding: 24px 0;
+    }
+
+    h1 {
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    /* Info Box */
+    .info-box {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(59, 130, 246, 0.15));
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .info-box-icon { font-size: 24px; }
+
+    .info-box-text {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+
+    .info-box-text strong {
+      color: var(--success);
+    }
+
+    /* Upload Zone */
+    .upload-zone {
+      background: var(--bg-card);
+      border: 2px dashed var(--border);
+      border-radius: 16px;
+      padding: 32px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 20px;
+    }
+
+    .upload-zone:hover, .upload-zone.dragover {
+      border-color: var(--accent);
+      background: rgba(255, 51, 102, 0.05);
+    }
+
+    .upload-icon { font-size: 40px; margin-bottom: 12px; }
+    .upload-text h3 { font-size: 1.1rem; margin-bottom: 4px; }
+    .upload-text p { color: var(--text-secondary); font-size: 0.8rem; }
+
+    #fileInput { display: none; }
+
+    /* Settings */
+    .settings-panel {
+      background: var(--bg-card);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 20px;
+      border: 1px solid var(--border);
+    }
+
+    .settings-header {
+      font-weight: 600;
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .settings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+    }
+
+    .setting-item {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .setting-item label {
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .setting-item select, .setting-item input {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: var(--text-primary);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .setting-item select:focus, .setting-item input:focus {
+      border-color: var(--accent);
+    }
+
+    /* Feature badge */
+    .feature-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1));
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--success);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    /* Stats */
+    .stats-bar {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .stat-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      flex: 1;
+      min-width: 100px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    /* Sections */
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .section-title {
+      font-size: 1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge {
+      background: var(--gradient);
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    /* Uploaded Images */
+    .uploaded-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .uploaded-item {
+      position: relative;
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--bg-secondary);
+    }
+
+    .uploaded-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .uploaded-item .num {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      background: rgba(0,0,0,0.8);
+      font-size: 0.6rem;
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+
+    .uploaded-item .remove {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      background: #ff3b30;
+      border: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      color: white;
+      font-size: 12px;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .uploaded-item:hover .remove {
+      display: flex;
+    }
+
+    /* Output Grid */
+    .output-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+    }
+
+    .output-card {
+      position: relative;
+      aspect-ratio: 9/16;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--bg-secondary);
+      border: 2px solid var(--border);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .output-card:hover {
+      border-color: var(--accent);
+      transform: scale(1.02);
+    }
+
+    .output-card canvas {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .output-label {
+      position: absolute;
+      bottom: 6px;
+      left: 6px;
+      right: 6px;
+      background: rgba(0,0,0,0.8);
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      text-align: center;
+    }
+
+    .output-info {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      background: rgba(16, 185, 129, 0.9);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.65rem;
+      font-weight: 600;
+    }
+
+    .output-download {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      background: var(--success);
+      border: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .output-card:hover .output-download {
+      opacity: 1;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--gradient);
+      color: white;
+      box-shadow: 0 6px 24px var(--accent-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-secondary {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+    }
+
+    .btn-sm {
+      padding: 8px 16px;
+      font-size: 0.8rem;
+    }
+
+    .action-bar {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    /* Progress */
+    .progress-wrap {
+      margin-top: 16px;
+      display: none;
+    }
+
+    .progress-wrap.active { display: block; }
+
+    .progress-bar {
+      height: 4px;
+      background: var(--bg-secondary);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--gradient);
+      width: 0%;
+      transition: width 0.2s;
+    }
+
+    .progress-text {
+      text-align: center;
+      margin-top: 6px;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 90px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--success);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      box-shadow: 0 6px 24px rgba(16, 185, 129, 0.4);
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Bottom Bar */
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, var(--bg-primary) 85%, transparent);
+      padding: 16px;
+      z-index: 100;
+      display: none;
+    }
+
+    .bottom-bar.show { display: block; }
+
+    .bottom-bar-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* Responsive */
+    @media (max-width: 500px) {
+      .container { padding: 10px; padding-bottom: 100px; }
+      .uploaded-item { width: 50px; height: 50px; }
+      .output-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item { min-width: 80px; padding: 10px; }
+      .stat-value { font-size: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-pattern"></div>
+  
+  <div class="container">
+    <header>
+      <h1>📸 Reels Otomatik Birleştirici</h1>
+      <p class="subtitle">Görselleri yükle → Otomatik birleştir → Reels formatında indir</p>
+    </header>
+
+    <!-- Feature Badge -->
+    <div style="text-align: center;">
+      <div class="feature-badge">
+        ✨ Akıllı Bölme: Görseller kesilmez, bir sonrakine atlar
+      </div>
+    </div>
+
+    <!-- Info -->
+    <div class="info-box">
+      <div class="info-box-icon">💡</div>
+      <div class="info-box-text">
+        <strong>Nasıl çalışır?</strong> Yüklediğin görseller sırayla alt alta birleştirilir. 
+        Bir görsel Reels'e sığmıyorsa <strong>kesilmez</strong>, otomatik olarak bir sonraki Reels'e atlar.
+        Böylece hiçbir görsel yarım kalmaz!
+      </div>
+    </div>
+
+    <!-- Upload -->
+    <div class="upload-zone" id="uploadZone">
+      <div class="upload-icon">📁</div>
+      <div class="upload-text">
+        <h3>Görselleri Sürükle veya Tıkla</h3>
+        <p>Birden fazla görsel seçebilirsin • Sıralama önemli</p>
+      </div>
+      <input type="file" id="fileInput" multiple accept="image/*">
+    </div>
+
+    <!-- Settings -->
+    <div class="settings-panel">
+      <div class="settings-header">⚙️ Ayarlar</div>
+      <div class="settings-grid">
+        <div class="setting-item">
+          <label>Arka Plan</label>
+          <input type="color" id="bgColor" value="#000000">
+        </div>
+        <div class="setting-item">
+          <label>Görsel Genişliği</label>
+          <select id="imageWidth">
+            <option value="100">%100 (Tam genişlik)</option>
+            <option value="95" selected>%95</option>
+            <option value="90">%90</option>
+            <option value="85">%85</option>
+          </select>
+        </div>
+        <div class="setting-item">
+          <label>Görsel Arası Boşluk</label>
+          <select id="imageGap">
+            <option value="0">Yok</option>
+            <option value="10" selected>Az (10px)</option>
+            <option value="20">Orta (20px)</option>
+            <option value="40">Çok (40px)</option>
+          </select>
+        </div>
+        <div class="setting-item">
+          <label>Kalite</label>
+          <select id="quality">
+            <option value="1">Maksimum</option>
+            <option value="0.92" selected>Yüksek</option>
+            <option value="0.8">Orta</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-bar" id="statsBar" style="display: none;">
+      <div class="stat-item">
+        <div class="stat-value" id="statImages">0</div>
+        <div class="stat-label">Görsel</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" id="statParts">~0</div>
+        <div class="stat-label">Tahmini Reels</div>
+      </div>
+    </div>
+
+    <!-- Uploaded Images -->
+    <div class="section" id="uploadedSection" style="display: none;">
+      <div class="section-header">
+        <div class="section-title">
+          🖼️ Yüklenen Görseller
+          <span class="badge" id="uploadedCount">0</span>
+        </div>
+        <button class="btn btn-secondary btn-sm" onclick="clearAll()">🗑️ Temizle</button>
+      </div>
+      <div class="uploaded-grid" id="uploadedGrid"></div>
+    </div>
+
+    <!-- Output -->
+    <div class="section" id="outputSection" style="display: none;">
+      <div class="section-header">
+        <div class="section-title">
+          ✨ Hazır Reels Görselleri
+          <span class="badge" id="outputCount">0</span>
+        </div>
+      </div>
+      <div class="output-grid" id="outputGrid"></div>
+      
+      <div class="progress-wrap" id="progressWrap">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p class="progress-text" id="progressText">İşleniyor...</p>
+      </div>
+
+      <div class="action-bar">
+        <button class="btn btn-primary" onclick="downloadAllZip()">
+          📥 Tümünü İndir (ZIP)
+        </button>
+        <button class="btn btn-secondary" onclick="downloadAllSeparate()">
+          📁 Ayrı Ayrı İndir
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="bottom-bar" id="bottomBar">
+    <div class="bottom-bar-content">
+      <button class="btn btn-primary" onclick="generateReels()">
+        ✨ Reels Oluştur
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script>
+    // Constants
+    const REELS_WIDTH = 1080;
+    const REELS_HEIGHT = 1920;
+
+    // State
+    let uploadedImages = [];
+    let loadedImages = [];
+    let outputCanvases = [];
+
+    // DOM
+    const uploadZone = document.getElementById('uploadZone');
+    const fileInput = document.getElementById('fileInput');
+    const uploadedGrid = document.getElementById('uploadedGrid');
+    const outputGrid = document.getElementById('outputGrid');
+    const uploadedSection = document.getElementById('uploadedSection');
+    const outputSection = document.getElementById('outputSection');
+    const statsBar = document.getElementById('statsBar');
+    const bottomBar = document.getElementById('bottomBar');
+    const progressWrap = document.getElementById('progressWrap');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+
+    // Settings
+    const bgColorInput = document.getElementById('bgColor');
+    const imageWidthInput = document.getElementById('imageWidth');
+    const imageGapInput = document.getElementById('imageGap');
+    const qualityInput = document.getElementById('quality');
+
+    // Upload events
+    uploadZone.addEventListener('click', () => fileInput.click());
+    uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+    uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+    uploadZone.addEventListener('drop', e => { e.preventDefault(); uploadZone.classList.remove('dragover'); handleFiles(e.dataTransfer.files); });
+    fileInput.addEventListener('change', e => handleFiles(e.target.files));
+
+    // Handle files
+    async function handleFiles(files) {
+      const validFiles = Array.from(files).filter(f => f.type.startsWith('image/'));
+      
+      for (const file of validFiles) {
+        const dataUrl = await readFile(file);
+        const img = await loadImage(dataUrl);
+        
+        uploadedImages.push({ src: dataUrl, name: file.name });
+        loadedImages.push(img);
+      }
+      
+      updateUI();
+      calculateStats();
+    }
+
+    function readFile(file) {
+      return new Promise(resolve => {
+        const reader = new FileReader();
+        reader.onload = e => resolve(e.target.result);
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function loadImage(src) {
+      return new Promise(resolve => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.src = src;
+      });
+    }
+
+    // Update UI
+    function updateUI() {
+      const hasImages = uploadedImages.length > 0;
+      
+      uploadedSection.style.display = hasImages ? 'block' : 'none';
+      statsBar.style.display = hasImages ? 'flex' : 'none';
+      bottomBar.classList.toggle('show', hasImages);
+      
+      document.getElementById('uploadedCount').textContent = uploadedImages.length;
+      document.getElementById('statImages').textContent = uploadedImages.length;
+      
+      renderUploadedGrid();
+    }
+
+    function renderUploadedGrid() {
+      uploadedGrid.innerHTML = '';
+      uploadedImages.forEach((img, i) => {
+        const div = document.createElement('div');
+        div.className = 'uploaded-item';
+        div.innerHTML = `
+          <img src="${img.src}" alt="">
+          <span class="num">${i + 1}</span>
+          <button class="remove" onclick="removeImage(${i})">×</button>
+        `;
+        uploadedGrid.appendChild(div);
+      });
+    }
+
+    function removeImage(index) {
+      uploadedImages.splice(index, 1);
+      loadedImages.splice(index, 1);
+      updateUI();
+      calculateStats();
+    }
+
+    function clearAll() {
+      uploadedImages = [];
+      loadedImages = [];
+      outputCanvases = [];
+      outputSection.style.display = 'none';
+      updateUI();
+      calculateStats();
+    }
+
+    // Calculate stats (tahmini)
+    function calculateStats() {
+      if (loadedImages.length === 0) {
+        document.getElementById('statParts').textContent = '~0';
+        return;
+      }
+
+      const widthPercent = parseInt(imageWidthInput.value) / 100;
+      const gap = parseInt(imageGapInput.value);
+      const targetWidth = REELS_WIDTH * widthPercent;
+      
+      // Akıllı bölme simülasyonu
+      let reelsCount = 1;
+      let currentY = 0;
+      
+      for (let i = 0; i < loadedImages.length; i++) {
+        const img = loadedImages[i];
+        const scale = targetWidth / img.width;
+        const scaledHeight = img.height * scale;
+        
+        // Bu görsel mevcut Reels'e sığar mı?
+        if (currentY + scaledHeight > REELS_HEIGHT && currentY > 0) {
+          // Sığmıyor, yeni Reels başlat
+          reelsCount++;
+          currentY = 0;
+        }
+        
+        currentY += scaledHeight + gap;
+      }
+      
+      document.getElementById('statParts').textContent = '~' + reelsCount;
+    }
+
+    // Settings change
+    imageWidthInput.addEventListener('change', calculateStats);
+    imageGapInput.addEventListener('change', calculateStats);
+
+    // Generate Reels with SMART SPLITTING
+    async function generateReels() {
+      if (loadedImages.length === 0) return;
+
+      const bgColor = bgColorInput.value;
+      const widthPercent = parseInt(imageWidthInput.value) / 100;
+      const gap = parseInt(imageGapInput.value);
+      const targetWidth = REELS_WIDTH * widthPercent;
+
+      progressWrap.classList.add('active');
+      progressText.textContent = 'Görseller analiz ediliyor...';
+      progressFill.style.width = '5%';
+
+      // Her görselin ölçekli boyutlarını hesapla
+      const scaledImages = loadedImages.map(img => {
+        const scale = targetWidth / img.width;
+        return {
+          img,
+          width: targetWidth,
+          height: img.height * scale
+        };
+      });
+
+      // AKILLI BÖLME: Görselleri Reels'lere dağıt (kesmeden)
+      const reelsParts = []; // Her eleman bir Reels için görsel listesi
+      let currentPart = [];
+      let currentHeight = 0;
+
+      for (let i = 0; i < scaledImages.length; i++) {
+        const item = scaledImages[i];
+        const itemHeight = item.height + (currentPart.length > 0 ? gap : 0);
+
+        // Bu görsel tek başına bile Reels'e sığmıyorsa, ölçekle
+        if (item.height > REELS_HEIGHT) {
+          // Çok uzun görsel - Reels yüksekliğine sığdır
+          const fitScale = REELS_HEIGHT / item.height;
+          item.width = item.width * fitScale;
+          item.height = REELS_HEIGHT;
+        }
+
+        // Mevcut Reels'e sığar mı?
+        if (currentHeight + itemHeight <= REELS_HEIGHT) {
+          // Sığıyor, ekle
+          currentPart.push({ ...item, index: i });
+          currentHeight += itemHeight;
+        } else {
+          // Sığmıyor
+          if (currentPart.length > 0) {
+            // Mevcut part'ı kaydet, yeni başlat
+            reelsParts.push(currentPart);
+            currentPart = [{ ...item, index: i }];
+            currentHeight = item.height;
+          } else {
+            // Boş part, görseli ekle
+            currentPart.push({ ...item, index: i });
+            currentHeight = item.height;
+          }
+        }
+
+        progressFill.style.width = (5 + (i / scaledImages.length) * 20) + '%';
+      }
+
+      // Son part'ı ekle
+      if (currentPart.length > 0) {
+        reelsParts.push(currentPart);
+      }
+
+      progressText.textContent = 'Reels görselleri oluşturuluyor...';
+      progressFill.style.width = '30%';
+
+      // Her part için canvas oluştur
+      outputCanvases = [];
+      outputGrid.innerHTML = '';
+      outputSection.style.display = 'block';
+
+      for (let p = 0; p < reelsParts.length; p++) {
+        const part = reelsParts[p];
+        
+        const canvas = document.createElement('canvas');
+        canvas.width = REELS_WIDTH;
+        canvas.height = REELS_HEIGHT;
+        const ctx = canvas.getContext('2d');
+
+        // Arka plan
+        ctx.fillStyle = bgColor;
+        ctx.fillRect(0, 0, REELS_WIDTH, REELS_HEIGHT);
+
+        // Bu part'taki toplam yüksekliği hesapla (ortalamak için)
+        let totalPartHeight = 0;
+        part.forEach((item, idx) => {
+          totalPartHeight += item.height;
+          if (idx < part.length - 1) totalPartHeight += gap;
+        });
+
+        // Dikey ortalama için başlangıç Y
+        let currentY = (REELS_HEIGHT - totalPartHeight) / 2;
+        if (currentY < 0) currentY = 0;
+
+        // Görselleri çiz
+        for (const item of part) {
+          const x = (REELS_WIDTH - item.width) / 2;
+          ctx.drawImage(item.img, x, currentY, item.width, item.height);
+          currentY += item.height + gap;
+        }
+
+        outputCanvases.push(canvas);
+
+        // Önizleme kartı
+        const card = document.createElement('div');
+        card.className = 'output-card';
+        
+        const preview = document.createElement('canvas');
+        preview.width = REELS_WIDTH;
+        preview.height = REELS_HEIGHT;
+        preview.getContext('2d').drawImage(canvas, 0, 0);
+        
+        // Part'taki görsel sayısını göster
+        const imgCount = part.length;
+        card.innerHTML = `
+          <div class="output-info">${imgCount} görsel</div>
+          <div class="output-label">Part ${p + 1} / ${reelsParts.length}</div>
+          <button class="output-download" onclick="downloadSingle(${p})">⬇</button>
+        `;
+        card.insertBefore(preview, card.firstChild);
+        outputGrid.appendChild(card);
+
+        progressFill.style.width = (30 + ((p + 1) / reelsParts.length) * 70) + '%';
+        progressText.textContent = `Part ${p + 1}/${reelsParts.length} oluşturuldu`;
+        
+        await new Promise(r => setTimeout(r, 30));
+      }
+
+      document.getElementById('outputCount').textContent = reelsParts.length;
+      progressWrap.classList.remove('active');
+      showToast(`✅ ${reelsParts.length} Reels görseli hazır! Hiçbir görsel kesilmedi.`);
+    }
+
+    // Download functions
+    function downloadSingle(index) {
+      const q = parseFloat(qualityInput.value);
+      const link = document.createElement('a');
+      link.href = outputCanvases[index].toDataURL('image/jpeg', q);
+      link.download = `reels_part_${index + 1}.jpg`;
+      link.click();
+    }
+
+    async function downloadAllZip() {
+      if (outputCanvases.length === 0) {
+        showToast('❌ Önce Reels oluştur!');
+        return;
+      }
+
+      const zip = new JSZip();
+      const q = parseFloat(qualityInput.value);
+
+      progressWrap.classList.add('active');
+
+      for (let i = 0; i < outputCanvases.length; i++) {
+        const dataUrl = outputCanvases[i].toDataURL('image/jpeg', q);
+        const base64 = dataUrl.split(',')[1];
+        zip.file(`reels_part_${String(i + 1).padStart(2, '0')}.jpg`, base64, { base64: true });
+        
+        progressFill.style.width = ((i + 1) / outputCanvases.length * 80) + '%';
+        progressText.textContent = `ZIP: ${i + 1}/${outputCanvases.length}`;
+      }
+
+      progressText.textContent = 'ZIP oluşturuluyor...';
+      progressFill.style.width = '90%';
+
+      const blob = await zip.generateAsync({ type: 'blob' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `instagram_reels_${Date.now()}.zip`;
+      link.click();
+
+      progressWrap.classList.remove('active');
+      showToast('📥 ZIP indirildi!');
+    }
+
+    function downloadAllSeparate() {
+      if (outputCanvases.length === 0) {
+        showToast('❌ Önce Reels oluştur!');
+        return;
+      }
+
+      const q = parseFloat(qualityInput.value);
+      outputCanvases.forEach((canvas, i) => {
+        setTimeout(() => {
+          const link = document.createElement('a');
+          link.href = canvas.toDataURL('image/jpeg', q);
+          link.download = `reels_part_${String(i + 1).padStart(2, '0')}.jpg`;
+          link.click();
+        }, i * 200);
+      });
+
+      showToast(`📥 ${outputCanvases.length} dosya indiriliyor...`);
+    }
+
+    // Toast
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+  </script>
+</body>
+</html>
