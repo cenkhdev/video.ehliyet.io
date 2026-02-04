@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram Reels Görsel Hazırlayıcı</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-card: #1a1a24;
+      --accent: #ff3366;
+      --accent-glow: rgba(255, 51, 102, 0.4);
+      --accent-secondary: #7c3aed;
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0b0;
+      --border: rgba(255, 255, 255, 0.08);
+      --success: #10b981;
+      --gradient: linear-gradient(135deg, #ff3366 0%, #7c3aed 50%, #3b82f6 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Animated Background */
+    .bg-pattern {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(ellipse at 20% 20%, rgba(255, 51, 102, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(124, 58, 237, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      padding-bottom: 100px;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 40px 0;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--gradient);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 8px 32px var(--accent-glow);
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 5vw, 2.5rem);
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin-top: 8px;
+      font-weight: 300;
+    }
+
+    /* Upload Zone */
+    .upload-zone {
+      background: var(--bg-card);
+      border: 2px dashed var(--border);
+      border-radius: 24px;
+      padding: 50px 30px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .upload-zone::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gradient);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .upload-zone:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .upload-zone:hover::before {
+      opacity: 0.05;
+    }
+
+    .upload-zone.dragover {
+      border-color: var(--accent);
+      background: rgba(255, 51, 102, 0.1);
+    }
+
+    .upload-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 20px;
+      background: var(--bg-secondary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .upload-text {
+      position: relative;
+      z-index: 1;
+    }
+
+    .upload-text h3 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .upload-text p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    #fileInput {
+      display: none;
+    }
+
+    /* Settings Panel */
+    .settings-panel {
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 30px;
+      border: 1px solid var(--border);
+    }
+
+    .settings-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .settings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .setting-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .setting-item label {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .setting-item select,
+    .setting-item input {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 16px;
+      color: var(--text-primary);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .setting-item select:focus,
+    .setting-item input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    /* Preview Section */
+    .preview-section {
+      margin-bottom: 30px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .count-badge {
+      background: var(--gradient);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    /* Image Grid */
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 16px;
+    }
+
+    .image-card {
+      position: relative;
+      aspect-ratio: 9/16;
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--bg-secondary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .image-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .image-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .image-card .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .image-card:hover .overlay {
+      opacity: 1;
+    }
+
+    .image-number {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: var(--gradient);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .remove-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255, 59, 48, 0.9);
+      border: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: all 0.2s ease;
+    }
+
+    .image-card:hover .remove-btn {
+      opacity: 1;
+    }
+
+    .remove-btn:hover {
+      transform: scale(1.1);
+      background: #ff3b30;
+    }
+
+    /* Output Preview */
+    .output-section {
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 30px;
+      border: 1px solid var(--border);
+    }
+
+    .output-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .output-card {
+      position: relative;
+      aspect-ratio: 9/16;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--bg-secondary);
+      border: 2px solid var(--border);
+    }
+
+    .output-card canvas {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .output-number {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      background: rgba(0,0,0,0.7);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-family: 'Space Mono', monospace;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 14px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--gradient);
+      color: white;
+      box-shadow: 0 8px 32px var(--accent-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px var(--accent-glow);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-secondary {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-card);
+      border-color: var(--accent);
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 24px;
+    }
+
+    /* Fixed Bottom Bar */
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, var(--bg-primary) 80%, transparent);
+      padding: 20px;
+      z-index: 100;
+    }
+
+    .bottom-bar-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* Info Badge */
+    .info-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--success);
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    /* Progress */
+    .progress-container {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .progress-container.active {
+      display: block;
+    }
+
+    .progress-bar {
+      height: 6px;
+      background: var(--bg-secondary);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--gradient);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .progress-text {
+      text-align: center;
+      margin-top: 8px;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-secondary);
+    }
+
+    .empty-state-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--success);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 600;
+      box-shadow: 0 8px 32px rgba(16, 185, 129, 0.4);
+      opacity: 0;
+      transition: all 0.4s ease;
+      z-index: 1000;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .container {
+        padding: 12px;
+        padding-bottom: 120px;
+      }
+
+      header {
+        padding: 24px 0;
+      }
+
+      .upload-zone {
+        padding: 40px 20px;
+      }
+
+      .settings-panel {
+        padding: 16px;
+      }
+
+      .image-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .output-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+
+      .btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+      }
+
+      .bottom-bar-content {
+        flex-direction: column;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .image-card {
+      animation: fadeIn 0.4s ease backwards;
+    }
+
+    .image-card:nth-child(1) { animation-delay: 0.05s; }
+    .image-card:nth-child(2) { animation-delay: 0.1s; }
+    .image-card:nth-child(3) { animation-delay: 0.15s; }
+    .image-card:nth-child(4) { animation-delay: 0.2s; }
+    .image-card:nth-child(5) { animation-delay: 0.25s; }
+    .image-card:nth-child(6) { animation-delay: 0.3s; }
+  </style>
+</head>
+<body>
+  <div class="bg-pattern"></div>
+  
+  <div class="container">
+    <header>
+      <div class="logo">
+        <div class="logo-icon">📸</div>
+        <h1>Reels Görsel Hazırlayıcı</h1>
+      </div>
+      <p class="subtitle">Fotoğraflarını seç, Instagram Reels formatında indir</p>
+    </header>
+
+    <!-- Upload Zone -->
+    <div class="upload-zone" id="uploadZone">
+      <div class="upload-icon">📁</div>
+      <div class="upload-text">
+        <h3>Fotoğraflarını Sürükle veya Tıkla</h3>
+        <p>PNG, JPG, WEBP • Çoklu seçim destekleniyor</p>
+      </div>
+      <input type="file" id="fileInput" multiple accept="image/*">
+    </div>
+
+    <!-- Settings Panel -->
+    <div class="settings-panel">
+      <div class="settings-header">
+        ⚙️ Ayarlar
+      </div>
+      <div class="settings-grid">
+        <div class="setting-item">
+          <label>Çıktı Boyutu</label>
+          <select id="outputSize">
+            <option value="1080x1920" selected>Instagram Reels (1080×1920)</option>
+            <option value="1080x1350">Instagram Portre (1080×1350)</option>
+            <option value="1080x1080">Instagram Kare (1080×1080)</option>
+            <option value="720x1280">HD Dikey (720×1280)</option>
+          </select>
+        </div>
+        <div class="setting-item">
+          <label>Arka Plan Rengi</label>
+          <input type="color" id="bgColor" value="#000000">
+        </div>
+        <div class="setting-item">
+          <label>Görsel Sığdırma</label>
+          <select id="fitMode">
+            <option value="contain" selected>Sığdır (Kenar boşluklu)</option>
+            <option value="cover">Kapla (Kırpılabilir)</option>
+          </select>
+        </div>
+        <div class="setting-item">
+          <label>Dosya Kalitesi</label>
+          <select id="quality">
+            <option value="1">Maksimum</option>
+            <option value="0.92" selected>Yüksek</option>
+            <option value="0.8">Orta</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Preview Section -->
+    <div class="preview-section" id="previewSection" style="display: none;">
+      <div class="section-header">
+        <div class="section-title">
+          🖼️ Seçilen Görseller
+          <span class="count-badge" id="imageCount">0</span>
+        </div>
+        <button class="btn btn-secondary" onclick="clearAll()">
+          🗑️ Temizle
+        </button>
+      </div>
+      <div class="image-grid" id="imageGrid"></div>
+    </div>
+
+    <!-- Output Section -->
+    <div class="output-section" id="outputSection" style="display: none;">
+      <div class="section-header">
+        <div class="section-title">
+          ✨ Hazırlanan Çıktılar
+          <span class="count-badge" id="outputCount">0</span>
+        </div>
+        <div class="info-badge">
+          <span>📐</span>
+          <span id="sizeInfo">1080×1920</span>
+        </div>
+      </div>
+      <div class="output-grid" id="outputGrid"></div>
+      
+      <div class="progress-container" id="progressContainer">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p class="progress-text" id="progressText">Hazırlanıyor...</p>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn btn-primary" id="downloadAllBtn" onclick="downloadAll()">
+          📥 Tümünü İndir (ZIP)
+        </button>
+        <button class="btn btn-secondary" onclick="downloadSeparate()">
+          📁 Ayrı Ayrı İndir
+        </button>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" id="emptyState">
+      <div class="empty-state-icon">📷</div>
+      <p>Henüz görsel seçilmedi<br>Yukarıdan fotoğraf yükle</p>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="bottom-bar" id="bottomBar" style="display: none;">
+    <div class="bottom-bar-content">
+      <button class="btn btn-primary" id="generateBtn" onclick="generateOutputs()">
+        ✨ Görselleri Hazırla
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <!-- JSZip Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+  <script>
+    // State
+    let uploadedImages = [];
+    let outputCanvases = [];
+
+    // DOM Elements
+    const uploadZone = document.getElementById('uploadZone');
+    const fileInput = document.getElementById('fileInput');
+    const imageGrid = document.getElementById('imageGrid');
+    const outputGrid = document.getElementById('outputGrid');
+    const previewSection = document.getElementById('previewSection');
+    const outputSection = document.getElementById('outputSection');
+    const emptyState = document.getElementById('emptyState');
+    const bottomBar = document.getElementById('bottomBar');
+    const imageCount = document.getElementById('imageCount');
+    const outputCount = document.getElementById('outputCount');
+    const sizeInfo = document.getElementById('sizeInfo');
+    const progressContainer = document.getElementById('progressContainer');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+
+    // Settings
+    const outputSize = document.getElementById('outputSize');
+    const bgColor = document.getElementById('bgColor');
+    const fitMode = document.getElementById('fitMode');
+    const quality = document.getElementById('quality');
+
+    // Upload Zone Events
+    uploadZone.addEventListener('click', () => fileInput.click());
+    
+    uploadZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      uploadZone.classList.add('dragover');
+    });
+
+    uploadZone.addEventListener('dragleave', () => {
+      uploadZone.classList.remove('dragover');
+    });
+
+    uploadZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadZone.classList.remove('dragover');
+      handleFiles(e.dataTransfer.files);
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      handleFiles(e.target.files);
+    });
+
+    // Handle File Upload
+    function handleFiles(files) {
+      const validFiles = Array.from(files).filter(f => f.type.startsWith('image/'));
+      
+      validFiles.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          uploadedImages.push({
+            src: e.target.result,
+            name: file.name
+          });
+          updateUI();
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // Update UI
+    function updateUI() {
+      const hasImages = uploadedImages.length > 0;
+      
+      previewSection.style.display = hasImages ? 'block' : 'none';
+      emptyState.style.display = hasImages ? 'none' : 'block';
+      bottomBar.style.display = hasImages ? 'block' : 'none';
+      
+      imageCount.textContent = uploadedImages.length;
+      
+      renderImageGrid();
+    }
+
+    // Render Image Grid
+    function renderImageGrid() {
+      imageGrid.innerHTML = '';
+      
+      uploadedImages.forEach((img, index) => {
+        const card = document.createElement('div');
+        card.className = 'image-card';
+        card.innerHTML = `
+          <img src="${img.src}" alt="Image ${index + 1}">
+          <div class="image-number">${index + 1}</div>
+          <button class="remove-btn" onclick="removeImage(${index})">×</button>
+          <div class="overlay"></div>
+        `;
+        imageGrid.appendChild(card);
+      });
+    }
+
+    // Remove Image
+    function removeImage(index) {
+      uploadedImages.splice(index, 1);
+      updateUI();
+    }
+
+    // Clear All
+    function clearAll() {
+      uploadedImages = [];
+      outputCanvases = [];
+      outputSection.style.display = 'none';
+      updateUI();
+    }
+
+    // Generate Outputs
+    async function generateOutputs() {
+      if (uploadedImages.length === 0) return;
+
+      const [width, height] = outputSize.value.split('x').map(Number);
+      const bg = bgColor.value;
+      const fit = fitMode.value;
+      
+      outputCanvases = [];
+      outputGrid.innerHTML = '';
+      outputSection.style.display = 'block';
+      progressContainer.classList.add('active');
+      
+      sizeInfo.textContent = `${width}×${height}`;
+      
+      for (let i = 0; i < uploadedImages.length; i++) {
+        // Update progress
+        const progress = ((i + 1) / uploadedImages.length) * 100;
+        progressFill.style.width = `${progress}%`;
+        progressText.textContent = `İşleniyor: ${i + 1}/${uploadedImages.length}`;
+        
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        
+        // Fill background
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, width, height);
+        
+        // Load and draw image
+        await new Promise((resolve) => {
+          const img = new Image();
+          img.onload = () => {
+            let drawWidth, drawHeight, drawX, drawY;
+            
+            if (fit === 'contain') {
+              const ratio = Math.min(width / img.width, height / img.height);
+              drawWidth = img.width * ratio;
+              drawHeight = img.height * ratio;
+              drawX = (width - drawWidth) / 2;
+              drawY = (height - drawHeight) / 2;
+            } else {
+              const ratio = Math.max(width / img.width, height / img.height);
+              drawWidth = img.width * ratio;
+              drawHeight = img.height * ratio;
+              drawX = (width - drawWidth) / 2;
+              drawY = (height - drawHeight) / 2;
+            }
+            
+            ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
+            resolve();
+          };
+          img.src = uploadedImages[i].src;
+        });
+        
+        outputCanvases.push(canvas);
+        
+        // Create preview card
+        const card = document.createElement('div');
+        card.className = 'output-card';
+        
+        const previewCanvas = document.createElement('canvas');
+        previewCanvas.width = width;
+        previewCanvas.height = height;
+        previewCanvas.getContext('2d').drawImage(canvas, 0, 0);
+        
+        card.innerHTML = `<div class="output-number">Part ${i + 1}</div>`;
+        card.insertBefore(previewCanvas, card.firstChild);
+        outputGrid.appendChild(card);
+      }
+      
+      outputCount.textContent = outputCanvases.length;
+      progressContainer.classList.remove('active');
+      showToast(`✅ ${outputCanvases.length} görsel hazırlandı!`);
+    }
+
+    // Download All as ZIP
+    async function downloadAll() {
+      if (outputCanvases.length === 0) {
+        showToast('❌ Önce görselleri hazırlayın!');
+        return;
+      }
+
+      const zip = new JSZip();
+      const q = parseFloat(quality.value);
+      
+      progressContainer.classList.add('active');
+      
+      for (let i = 0; i < outputCanvases.length; i++) {
+        const progress = ((i + 1) / outputCanvases.length) * 100;
+        progressFill.style.width = `${progress}%`;
+        progressText.textContent = `ZIP oluşturuluyor: ${i + 1}/${outputCanvases.length}`;
+        
+        const dataUrl = outputCanvases[i].toDataURL('image/jpeg', q);
+        const base64 = dataUrl.split(',')[1];
+        zip.file(`reels_part_${String(i + 1).padStart(2, '0')}.jpg`, base64, { base64: true });
+      }
+      
+      progressText.textContent = 'ZIP dosyası oluşturuluyor...';
+      
+      const blob = await zip.generateAsync({ type: 'blob' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `instagram_reels_${Date.now()}.zip`;
+      link.click();
+      
+      progressContainer.classList.remove('active');
+      showToast('📥 ZIP dosyası indirildi!');
+    }
+
+    // Download Separate
+    function downloadSeparate() {
+      if (outputCanvases.length === 0) {
+        showToast('❌ Önce görselleri hazırlayın!');
+        return;
+      }
+
+      const q = parseFloat(quality.value);
+      
+      outputCanvases.forEach((canvas, i) => {
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/jpeg', q);
+        link.download = `reels_part_${String(i + 1).padStart(2, '0')}.jpg`;
+        link.click();
+      });
+      
+      showToast(`📥 ${outputCanvases.length} görsel indirildi!`);
+    }
+
+    // Show Toast
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    // Update size info when changed
+    outputSize.addEventListener('change', () => {
+      const [w, h] = outputSize.value.split('x');
+      sizeInfo.textContent = `${w}×${h}`;
+    });
+  </script>
+</body>
+</html>
