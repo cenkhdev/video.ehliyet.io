@@ -167,6 +167,21 @@
       border-color: var(--accent);
     }
 
+    /* Feature badge */
+    .feature-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1));
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--success);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
     /* Stats */
     .stats-bar {
       display: flex;
@@ -181,7 +196,7 @@
       border-radius: 10px;
       padding: 12px 16px;
       flex: 1;
-      min-width: 120px;
+      min-width: 100px;
       text-align: center;
     }
 
@@ -321,6 +336,17 @@
       border-radius: 6px;
       font-size: 0.7rem;
       text-align: center;
+    }
+
+    .output-info {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      background: rgba(16, 185, 129, 0.9);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.65rem;
+      font-weight: 600;
     }
 
     .output-download {
@@ -492,13 +518,20 @@
       <p class="subtitle">Görselleri yükle → Otomatik birleştir → Reels formatında indir</p>
     </header>
 
+    <!-- Feature Badge -->
+    <div style="text-align: center;">
+      <div class="feature-badge">
+        ✨ Akıllı Bölme: Görseller kesilmez, bir sonrakine atlar
+      </div>
+    </div>
+
     <!-- Info -->
     <div class="info-box">
       <div class="info-box-icon">💡</div>
       <div class="info-box-text">
-        <strong>Nasıl çalışır?</strong> Yüklediğin tüm görseller sırayla alt alta birleştirilir, 
-        sonra Instagram Reels boyutunda (1080×1920) otomatik olarak parçalara bölünür. 
-        Artık ekran görüntüsü almana gerek yok!
+        <strong>Nasıl çalışır?</strong> Yüklediğin görseller sırayla alt alta birleştirilir. 
+        Bir görsel Reels'e sığmıyorsa <strong>kesilmez</strong>, otomatik olarak bir sonraki Reels'e atlar.
+        Böylece hiçbir görsel yarım kalmaz!
       </div>
     </div>
 
@@ -556,12 +589,8 @@
         <div class="stat-label">Görsel</div>
       </div>
       <div class="stat-item">
-        <div class="stat-value" id="statHeight">0</div>
-        <div class="stat-label">Toplam Yükseklik</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-value" id="statParts">0</div>
-        <div class="stat-label">Reels Parçası</div>
+        <div class="stat-value" id="statParts">~0</div>
+        <div class="stat-label">Tahmini Reels</div>
       </div>
     </div>
 
@@ -730,38 +759,44 @@
       calculateStats();
     }
 
-    // Calculate stats
+    // Calculate stats (tahmini)
     function calculateStats() {
       if (loadedImages.length === 0) {
-        document.getElementById('statHeight').textContent = '0';
-        document.getElementById('statParts').textContent = '0';
+        document.getElementById('statParts').textContent = '~0';
         return;
       }
 
       const widthPercent = parseInt(imageWidthInput.value) / 100;
       const gap = parseInt(imageGapInput.value);
+      const targetWidth = REELS_WIDTH * widthPercent;
       
-      let totalHeight = 0;
+      // Akıllı bölme simülasyonu
+      let reelsCount = 1;
+      let currentY = 0;
       
-      loadedImages.forEach((img, i) => {
-        // Her görsel REELS_WIDTH'e göre ölçekleniyor
-        const scale = (REELS_WIDTH * widthPercent) / img.width;
+      for (let i = 0; i < loadedImages.length; i++) {
+        const img = loadedImages[i];
+        const scale = targetWidth / img.width;
         const scaledHeight = img.height * scale;
-        totalHeight += scaledHeight;
-        if (i < loadedImages.length - 1) totalHeight += gap;
-      });
+        
+        // Bu görsel mevcut Reels'e sığar mı?
+        if (currentY + scaledHeight > REELS_HEIGHT && currentY > 0) {
+          // Sığmıyor, yeni Reels başlat
+          reelsCount++;
+          currentY = 0;
+        }
+        
+        currentY += scaledHeight + gap;
+      }
       
-      const numParts = Math.ceil(totalHeight / REELS_HEIGHT);
-      
-      document.getElementById('statHeight').textContent = Math.round(totalHeight) + 'px';
-      document.getElementById('statParts').textContent = numParts;
+      document.getElementById('statParts').textContent = '~' + reelsCount;
     }
 
     // Settings change
     imageWidthInput.addEventListener('change', calculateStats);
     imageGapInput.addEventListener('change', calculateStats);
 
-    // Generate Reels
+    // Generate Reels with SMART SPLITTING
     async function generateReels() {
       if (loadedImages.length === 0) return;
 
@@ -770,77 +805,103 @@
       const gap = parseInt(imageGapInput.value);
       const targetWidth = REELS_WIDTH * widthPercent;
 
-      // 1. Önce tüm görselleri alt alta birleştir (tek uzun canvas)
       progressWrap.classList.add('active');
-      progressText.textContent = 'Görseller birleştiriliyor...';
-      progressFill.style.width = '10%';
+      progressText.textContent = 'Görseller analiz ediliyor...';
+      progressFill.style.width = '5%';
 
-      // Toplam yüksekliği hesapla
-      let totalHeight = 0;
-      const scaledDimensions = [];
-
-      loadedImages.forEach((img, i) => {
+      // Her görselin ölçekli boyutlarını hesapla
+      const scaledImages = loadedImages.map(img => {
         const scale = targetWidth / img.width;
-        const scaledHeight = img.height * scale;
-        scaledDimensions.push({ width: targetWidth, height: scaledHeight, scale });
-        totalHeight += scaledHeight;
-        if (i < loadedImages.length - 1) totalHeight += gap;
+        return {
+          img,
+          width: targetWidth,
+          height: img.height * scale
+        };
       });
 
-      // Uzun canvas oluştur
-      const longCanvas = document.createElement('canvas');
-      longCanvas.width = REELS_WIDTH;
-      longCanvas.height = totalHeight;
-      const longCtx = longCanvas.getContext('2d');
+      // AKILLI BÖLME: Görselleri Reels'lere dağıt (kesmeden)
+      const reelsParts = []; // Her eleman bir Reels için görsel listesi
+      let currentPart = [];
+      let currentHeight = 0;
 
-      // Arka plan
-      longCtx.fillStyle = bgColor;
-      longCtx.fillRect(0, 0, REELS_WIDTH, totalHeight);
+      for (let i = 0; i < scaledImages.length; i++) {
+        const item = scaledImages[i];
+        const itemHeight = item.height + (currentPart.length > 0 ? gap : 0);
 
-      // Görselleri çiz
-      let currentY = 0;
-      for (let i = 0; i < loadedImages.length; i++) {
-        const img = loadedImages[i];
-        const dim = scaledDimensions[i];
-        const x = (REELS_WIDTH - dim.width) / 2;
-        
-        longCtx.drawImage(img, x, currentY, dim.width, dim.height);
-        currentY += dim.height + gap;
+        // Bu görsel tek başına bile Reels'e sığmıyorsa, ölçekle
+        if (item.height > REELS_HEIGHT) {
+          // Çok uzun görsel - Reels yüksekliğine sığdır
+          const fitScale = REELS_HEIGHT / item.height;
+          item.width = item.width * fitScale;
+          item.height = REELS_HEIGHT;
+        }
 
-        progressFill.style.width = (10 + (i / loadedImages.length) * 40) + '%';
+        // Mevcut Reels'e sığar mı?
+        if (currentHeight + itemHeight <= REELS_HEIGHT) {
+          // Sığıyor, ekle
+          currentPart.push({ ...item, index: i });
+          currentHeight += itemHeight;
+        } else {
+          // Sığmıyor
+          if (currentPart.length > 0) {
+            // Mevcut part'ı kaydet, yeni başlat
+            reelsParts.push(currentPart);
+            currentPart = [{ ...item, index: i }];
+            currentHeight = item.height;
+          } else {
+            // Boş part, görseli ekle
+            currentPart.push({ ...item, index: i });
+            currentHeight = item.height;
+          }
+        }
+
+        progressFill.style.width = (5 + (i / scaledImages.length) * 20) + '%';
       }
 
-      progressText.textContent = 'Parçalara bölünüyor...';
-      progressFill.style.width = '50%';
+      // Son part'ı ekle
+      if (currentPart.length > 0) {
+        reelsParts.push(currentPart);
+      }
 
-      // 2. Uzun canvas'ı REELS_HEIGHT parçalarına böl
-      const numParts = Math.ceil(totalHeight / REELS_HEIGHT);
+      progressText.textContent = 'Reels görselleri oluşturuluyor...';
+      progressFill.style.width = '30%';
+
+      // Her part için canvas oluştur
       outputCanvases = [];
       outputGrid.innerHTML = '';
       outputSection.style.display = 'block';
 
-      for (let i = 0; i < numParts; i++) {
-        const partCanvas = document.createElement('canvas');
-        partCanvas.width = REELS_WIDTH;
-        partCanvas.height = REELS_HEIGHT;
-        const partCtx = partCanvas.getContext('2d');
+      for (let p = 0; p < reelsParts.length; p++) {
+        const part = reelsParts[p];
+        
+        const canvas = document.createElement('canvas');
+        canvas.width = REELS_WIDTH;
+        canvas.height = REELS_HEIGHT;
+        const ctx = canvas.getContext('2d');
 
         // Arka plan
-        partCtx.fillStyle = bgColor;
-        partCtx.fillRect(0, 0, REELS_WIDTH, REELS_HEIGHT);
+        ctx.fillStyle = bgColor;
+        ctx.fillRect(0, 0, REELS_WIDTH, REELS_HEIGHT);
 
-        // Kaynak bölge
-        const sourceY = i * REELS_HEIGHT;
-        const sourceHeight = Math.min(REELS_HEIGHT, totalHeight - sourceY);
+        // Bu part'taki toplam yüksekliği hesapla (ortalamak için)
+        let totalPartHeight = 0;
+        part.forEach((item, idx) => {
+          totalPartHeight += item.height;
+          if (idx < part.length - 1) totalPartHeight += gap;
+        });
 
-        // Parçayı çiz
-        partCtx.drawImage(
-          longCanvas,
-          0, sourceY, REELS_WIDTH, sourceHeight,
-          0, 0, REELS_WIDTH, sourceHeight
-        );
+        // Dikey ortalama için başlangıç Y
+        let currentY = (REELS_HEIGHT - totalPartHeight) / 2;
+        if (currentY < 0) currentY = 0;
 
-        outputCanvases.push(partCanvas);
+        // Görselleri çiz
+        for (const item of part) {
+          const x = (REELS_WIDTH - item.width) / 2;
+          ctx.drawImage(item.img, x, currentY, item.width, item.height);
+          currentY += item.height + gap;
+        }
+
+        outputCanvases.push(canvas);
 
         // Önizleme kartı
         const card = document.createElement('div');
@@ -849,25 +910,27 @@
         const preview = document.createElement('canvas');
         preview.width = REELS_WIDTH;
         preview.height = REELS_HEIGHT;
-        preview.getContext('2d').drawImage(partCanvas, 0, 0);
+        preview.getContext('2d').drawImage(canvas, 0, 0);
         
+        // Part'taki görsel sayısını göster
+        const imgCount = part.length;
         card.innerHTML = `
-          <div class="output-label">Part ${i + 1} / ${numParts}</div>
-          <button class="output-download" onclick="downloadSingle(${i})">⬇</button>
+          <div class="output-info">${imgCount} görsel</div>
+          <div class="output-label">Part ${p + 1} / ${reelsParts.length}</div>
+          <button class="output-download" onclick="downloadSingle(${p})">⬇</button>
         `;
         card.insertBefore(preview, card.firstChild);
         outputGrid.appendChild(card);
 
-        progressFill.style.width = (50 + ((i + 1) / numParts) * 50) + '%';
-        progressText.textContent = `Parça ${i + 1}/${numParts} oluşturuldu`;
+        progressFill.style.width = (30 + ((p + 1) / reelsParts.length) * 70) + '%';
+        progressText.textContent = `Part ${p + 1}/${reelsParts.length} oluşturuldu`;
         
-        // UI güncellemesi için kısa bekleme
-        await new Promise(r => setTimeout(r, 50));
+        await new Promise(r => setTimeout(r, 30));
       }
 
-      document.getElementById('outputCount').textContent = numParts;
+      document.getElementById('outputCount').textContent = reelsParts.length;
       progressWrap.classList.remove('active');
-      showToast(`✅ ${numParts} Reels görseli hazır!`);
+      showToast(`✅ ${reelsParts.length} Reels görseli hazır! Hiçbir görsel kesilmedi.`);
     }
 
     // Download functions
